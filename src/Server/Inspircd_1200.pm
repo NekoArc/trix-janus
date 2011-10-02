@@ -247,6 +247,7 @@ $moddef{CORE} = {
 		o => 'n_op',
 		a => 'n_admin',
 		q => 'n_owner',
+		b => 'l_ban',
 		i => 'r_invite',
 		k => 'v_key',
 		l => 's_limit',
