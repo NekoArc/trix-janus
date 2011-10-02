@@ -16,6 +16,7 @@ Event::command_add({
   syntax => '<option> <message>',
   code => sub {
     my ($src, $dst, $opt, @global) = @_;
+
     if (!defined $opt || !defined $global[0])
     {
       Janus::jmsg($dst, "Not enough arguments. See \002HELP GLOBAL\002 for usage.");
@@ -23,12 +24,11 @@ Event::command_add({
     }
     my $msg = (join ' ', @global);
 
-    $msg = "Network Notice - [".$dst->homenick."] $msg";
+    $msg = "[\00303".$dst->homenick."\003] $msg";
     $opt = lc $opt;
 
     if ($opt eq 'notice')
     {
-      
       foreach (keys %Janus::gnicks)
       {
         my $nick = $Janus::gnicks{$_};

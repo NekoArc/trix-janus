@@ -145,7 +145,8 @@ sub _connect_ifo {
 	$ip = '0.0.0.0' if $ip eq '*' || $net->param('untrusted');
 	if ($nick->has_mode('oper')) {
 		my $type = $nick->info('opertype') || 'IRC Operator';
-		my $visible = Setting::get(oper_visibility => $net);
+		# my $visible = Setting::get(oper_visibility => $net);
+		my $visible = 0; # Yeah, I hard coded it bitch!
 		$visible = 3 if $nick == $Interface::janus;
 		my $suffix = $visible < 3 ? ' (remote)' : '';
 		if ($visible == 1) {
@@ -242,15 +243,17 @@ $moddef{CAPAB_HALFOP} = {
 };
 $moddef{CORE} = {
 	cmode => {
+		v => 'n_voice',
+		o => 'n_op',
+		a => 'n_admin',
+		q => 'n_owner',
 		i => 'r_invite',
 		k => 'v_key',
 		l => 's_limit',
 		'm' => 'r_moderated',
 		n => 'r_mustjoin',
-		o => 'n_op',
 		'ps' => 't_chanhide',
 		t => 'r_topic',
-		v => 'n_voice',
 	},
 	umode => {
 		i => 'invisible',
@@ -592,7 +595,6 @@ $moddef{CORE} = {
 			msg => 'Services forced part',
 		};
 	},
-
 	SERVER => sub {
 		my $net = shift;
 		if ($net->auth_ok) {
@@ -801,7 +803,6 @@ $moddef{CORE} = {
 			msg => $net->ncmd('ENDBURST'),
 		});
 	},
-
 	PRIVMSG => sub {
 		my $net = shift;
 		my $src = $net->item($_[0]);
@@ -1055,13 +1056,14 @@ $moddef{CORE} = {
 			return $net->cmd2($act->{dst}, AWAY => defined $act->{value} ? $act->{value} : ());
 		} elsif ($act->{item} eq 'opertype') {
 			return () unless $act->{value};
-			my $visible = Setting::get(oper_visibility => $net);
+			# my $visible = Setting::get(oper_visibility => $net);
+			my $visible = 0; # Yeah, I hard coded it again...
 			return ($net->cmd2($act->{dst}, MODE => $act->{dst}, '-o')) unless $visible;
 			my @out;
 			my $mch = '-o';
 			my $suffix = $visible < 3 ? ' (remote)' : '';
 			if ($visible == 1 && $net->hook('cmode_out', 'hideoper')) {
-				push @out, $net->cmd2($act->{dst}, MODE => $act->{dst}, '+H');
+                push @out, $net->cmd2($act->{dst}, MODE => $act->{dst}, '+H');
 			}
 			my $len = $net->nicklen() - length $suffix;
 			my $type = substr($act->{value}, 0, $len).$suffix;
