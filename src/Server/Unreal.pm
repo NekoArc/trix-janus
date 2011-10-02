@@ -453,9 +453,10 @@ sub umode_from_irc {
 
 my $unreal64_table = join '', 0 .. 9, 'A'..'Z', 'a'..'z', '{}';
 
+# This was wrong? It had * for owner and ~ for admin Oo
 my %sjpfx2txt = (
-	'*' => 'owner',
-	'~' => 'admin',
+	'~' => 'owner',
+	'&' => 'admin',
 	'@' => 'op',
 	'%' => 'halfop',
 	'+' => 'voice',
@@ -1004,7 +1005,7 @@ $moddef{CORE} = {
 				$cmode .= $1;
 				push @_, $2;
 			} else {
-				/^([*~@%+]*)(.+)/ or warn;
+				/^([~&@%+]*)(.+)/ or warn;
 				my $nmode = $1;
 				my $nick = $net->mynick($2) or next;
 				my %mh = map { ($sjpfx2txt{$_}, 1) } split //, $nmode;

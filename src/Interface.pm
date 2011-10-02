@@ -382,7 +382,7 @@ sub jmsg {
 	my $dst = shift;
 	return unless $dst && ref $dst;
 	my $type =
-		$dst->isa('Nick') ? 'NOTICE' :
+		$dst->isa('Nick') ? 'PRIVMSG' :
 		$dst->isa('Channel') ? 'PRIVMSG' : '';
 	return unless $type;
 	local $_;
