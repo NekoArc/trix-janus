@@ -62,7 +62,7 @@ sub pmsg {
 	return undef unless $src->isa('Nick') && $dst->isa('Nick');
 
 	unless ($$src == 1 || $$dst == 1 || $src->is_on($dst->homenet())) {
-		Interface::jmsg($src, 'You must join a shared channel to speak with remote users') if $act->{msgtype} eq 'PRIVMSG';
+#		Interface::jmsg($src, 'You must join a shared channel to speak with remote users') if $act->{msgtype} eq 'PRIVMSG';
 		return 1;
 	}
 	undef;
