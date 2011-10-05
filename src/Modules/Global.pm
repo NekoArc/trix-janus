@@ -9,15 +9,14 @@ Event::command_add({
   help => 'Send a global message to all channels/users.',
   section => 'Network managment',
   details => [
-    " \002NOTICE\002  Send a global NOTICE to all users Janus can see.",
-    " \002CHANMSG\002 Send a global PRIVMSG to all channels Janus is in."
+    "Sends a global PRIVMSG to all channels Janus is in."
   ],
   acl => 'netop',
-  syntax => '<option> <message>',
+  syntax => '<message>',
   code => sub {
-    my ($src, $dst, $opt, @global) = @_;
+    my ($src, $dst, @global) = @_;
 
-    if (!defined $opt || !defined $global[0])
+    if (!defined $global[0])
     {
       Janus::jmsg($dst, "Not enough arguments. See \002HELP GLOBAL\002 for usage.");
       return;
@@ -25,38 +24,17 @@ Event::command_add({
     my $msg = (join ' ', @global);
 
     $msg = "[\00303".$dst->homenick."\003] $msg";
-    $opt = lc $opt;
 
-    if ($opt eq 'notice')
+    foreach (keys %Janus::gchans)
     {
-      foreach (keys %Janus::gnicks)
-      {
-        my $nick = $Janus::gnicks{$_};
-        Event::insert_full({
-          type => 'MSG',
-          dst => $nick,
-          msgtype => 'NOTICE',
-          src => $Interface::janus,
-          msg => $msg
-        });
-      }
+      Event::insert_full({
+        type => 'MSG',
+        dst => $Janus::gchans{$_},
+        msgtype => 'PRIVMSG',
+        src => $Interface::janus,
+        msg => $msg
+      });
     }
-    elsif ($opt eq 'chanmsg')
-    {
-      foreach (keys %Janus::gchans)
-      {
-        Event::insert_full({
-          type => 'MSG',
-          dst => $Janus::gchans{$_},
-          msgtype => 'PRIVMSG',
-          src => $Interface::janus,
-          msg => $msg
-        });
-      }
-    } else {
-      Janus::jmsg($dst, "Invalid option \002".uc($opt)."\002. See HELP GLOBAL for usage.");
-    }
-
     Janus::jmsg($dst, "Successfully sent.");
   }
 });

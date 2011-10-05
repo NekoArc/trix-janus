@@ -32,6 +32,10 @@ Modules::Claim
   Prevents opers and other network's services from changing modes in a shared
   channel if that channel has been claimed by certain network(s)
 
+Modules::Global
+  Allows Netops within Janus to send a global PRIVMSG to the channels of
+  all networks connected via the Janus.
+
 Modules::KeepMode
   Stores the modes of a channel and restores them on a relink.
   Useful if you use "setmode" to change mode not available on the home network's ircd.
@@ -47,19 +51,14 @@ Modules::Spamfilter (EXPERIMENTAL)
   Kills users sending a message matching a hardcoded regular expression. It is
   planned to replace this with a proper word-basd filter in the future.
 
-Modules::Vanish
-  Similar to ban, but makes the user invisible to the banning network rather
-  than kicking them. This is clearly going to cause an apparent desync,
-  including people talking to ghosts.
-
 Modules::WhoisFilter
   Filters the /whois notification sent for remote nicks. These notices can be
   an annoyance because opers may not even be able to see a nick that can /whois
   them, and are often not interested in the activity of users not on their
   network.
 
-Modules::Xline
-  Caches G-, Z-, and Q-lines for all networks, and optionally applies them to
+Modules::Qline
+  Caches Q-lines for all networks, and optionally applies them to
   incoming nicks. This module must be loaded when janus starts to cache all
   lines; if loaded while running, it will only cache new lines, or will learn of
   all lines on the next netsplit.
