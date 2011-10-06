@@ -490,8 +490,12 @@ sub kicked {
 
 our %moddef = ();
 Janus::static('moddef');
+# Shouldn't this have q and a just incase?
+# Well, it does now...
 $moddef{CORE} = {
 	cmode => {qw/
+		q n_owner
+		a n_admin
 		o n_op
 		h n_halfop
 		v n_voice
