@@ -9,27 +9,37 @@ set {
 	# the server in the interjanus protocol.
 	# This does NOT need to be a domain name; it should be short.
 	name yourserver
+
 	# Saved data location - this is the file which janus will load and save
 	# state (such as the list of shared channels) between runs
 	save janus.dat
+
 	# Janus nick - change this if you want a different interface nick
 	# ident and host are similarly settable
 	janus_nick janus
+
 	# Administrator password - if set, this enables an "admin" account with 
 	# full access to all commands. Once you have created normal accounts,
 	# this should be disabled as the password is stored in plaintext.
 	password verysecret
+
 	# Link mode - use janus as a network partition or a transparent bridge
 	#  link - network partition, channels must be explicitly linked
 	#  bridge - transpaent link, all channels linked, opers are more global
 	lmode link
+
+	# Forced Network Tagging - this will force network tags for all users
+	# connected via janus to your network and may resolve common nick colission
+	# issues if janus' default detection methods fails for some reason.
+	# tagall 1
+
 	# Run mode - process execution style
 	#  mplex - Handle SSL and sockets using C; allows for perl process to be
 	#	transparently restarted if perl's memory allocation gets too large
 	#  uproc - Handle sockets internally to the worker process
 	# If "-daemon" is appended, janus will daemonize and optionally record its PID
-#	pidfile janus.pid
-#	runmode uproc-daemon
+	# pidfile janus.pid
+	# runmode uproc-daemon
 
 	# Other parameters as defined by modules may be present here
 	# Example: Commands::Debug takes a date-based format for the dump files
@@ -50,28 +60,31 @@ set {
 modules {
 	Commands::*
 	Modules::Ban
-	Modules::KeepMode
+	Modules::Claim
+	Modules::Global
 	Modules::Signals
+	Modules::Spamfilter
 }
 
 # Log blocks
-
-log log/%Y-%m-%d-%H:%M:%S {
+log log/%Y%m%d.log {
 	# Type - a module in the Log package
 	# For "File" logs, the name is a strftime format string that will become the filename
 	type File
+
 	# Filter - what events to send to the log. Space-separated values
 	# See Log.pm for a full list; this will produce a reasonable log.
 	# Uncomment the filter to make a full log if you are submitting a bug report.
-	filter debug info warn err audit command debug_in info_in warn_in err_in hook_err
+	filter debug info warn err audit debug_in info_in warn_in err_in hook_err poison
 
 	## The following settings are specific to the File type:
 	# Run a dump before opening the log file (for possible replays)
-	#dump 1
+	# dump 1
 	# rotate the log every N seconds
 	rotate 86400
+
 	# action to take on the log after closing
-	closeact gzip
+	# closeact gzip
 }
 
 # Channel log: <netid>#channel
@@ -97,32 +110,44 @@ listen 1.2.3.4:8006
 link u3 {
 	# Server type. This is a module in the Server package
 	type Unreal
+
 	# Should we try to autoconnect to this network by default?
 	autoconnect 1
+
 	# Address to connect to. Will do a DNS lookup if needed
 	# Using DNS will disable incoming connections from this server
 	linkaddr ::1
+
 	# Port to connect to
 	linkport 8001
+
 	# Source address (optional, for multihomed hosts)
 	linkbind ::1
+
 	# Password which is sent
 	sendpass pass
+
 	# Password which is expected to receive
 	recvpass pass
+
 	# Link type: either plain or ssl. Also used for incoming connections.
 	linktype ssl
+
 	# For SSL links, certificate fingerprint may be checked.
 	# See extras/get-fp to read the fingerprint of an existing server
 	# This is done instead of checking the CA
 	ssl_fp da39a3ee5e6b4b0d3255bfef95601890afd80709
+
 	# Long name of this network
 	netname Test 1
+
 	# What server name is used to introduce ourselves
 	# Optional, defaults to NAME.janus where NAME is set above
 	linkname hub.janus
+
 	# Unreal-only: numerics used for janus servers. Optional, defaults to 100-600
 	numeric_range 40-45,70,85-190
+
 	# Untrusted: if set, don't send real IP/host to this network
 	# untrusted 1
 }

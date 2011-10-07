@@ -58,6 +58,10 @@ sub request_nick {
 		my $tagre = Setting::get(force_tag => $net);
 		$tagged = 1 if $tagre && $$nick != 1 && $given =~ /^$tagre$/i;
 
+		# Let's be less destructive than ircreview...
+		my $tagemall = $Janus::tagalll;
+		$tagged = 1 if $tagemall;
+
 		if ($tagged) {
 			my $tagsep = Setting::get(tagsep => $net);
 			my $tag = $tagsep . $nick->homenet()->name();
