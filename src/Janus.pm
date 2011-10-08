@@ -63,6 +63,10 @@ Either "link" or "bridge" depending on the link mode.
 
 Either true or false depending on the tagall setting.
 
+=item $Janus::operlvl
+
+Level of oper status sharing from from other Janus linked networks.
+
 =item %Janus::modinfo
 
 Map of module name to module information hash.

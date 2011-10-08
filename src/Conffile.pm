@@ -114,12 +114,22 @@ sub read_conf {
 		return;
 	}
 	unless (defined($Janus::tagall)) {
-		my $tag = $newconf{set}{tagall} || 1;
+		my $tag = $newconf{set}{tagall} || 0;
 		if ($tag = 1 or $tag = 0) {
 			$Janus::tagall = $tag;
 		}
 		else {
 			Log::err("Bad value $tag for set::tagall");
+			return;
+		}
+	}
+	unless (defined($Janus::operlvl)) {
+		my $operlvl = $newconf{set}{operlvl} || 0;
+		if ($operlvl >= 0 && $operlvl < 3) {
+			$Janus::operlvl = $operlvl;
+		}
+		else {
+			Log::err("Bad value $operlvl for set::operlvl");
 			return;
 		}
 	}

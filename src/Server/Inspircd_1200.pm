@@ -145,8 +145,8 @@ sub _connect_ifo {
 	$ip = '0.0.0.0' if $ip eq '*' || $net->param('untrusted');
 	if ($nick->has_mode('oper')) {
 		my $type = $nick->info('opertype') || 'IRC Operator';
-		# my $visible = Setting::get(oper_visibility => $net);
-		my $visible = 0; # Yeah, I hard coded it bitch!
+		my $visible = $Janus::operlvl;
+		$visible = Setting::get(oper_visibility => $net) if Setting::get(oper_visibility => $net) < $visible;
 		$visible = 3 if $nick == $Interface::janus;
 		my $suffix = $visible < 3 ? ' (remote)' : '';
 		if ($visible == 1) {
@@ -1057,8 +1057,8 @@ $moddef{CORE} = {
 			return $net->cmd2($act->{dst}, AWAY => defined $act->{value} ? $act->{value} : ());
 		} elsif ($act->{item} eq 'opertype') {
 			return () unless $act->{value};
-			# my $visible = Setting::get(oper_visibility => $net);
-			my $visible = 0; # Yeah, I hard coded it again...
+			my $visible = $Janus::operlvl;
+			$visible = Setting::get(oper_visibility => $net) if Setting::get(oper_visibility => $net) < $visible;
 			return ($net->cmd2($act->{dst}, MODE => $act->{dst}, '-o')) unless $visible;
 			my @out;
 			my $mch = '-o';

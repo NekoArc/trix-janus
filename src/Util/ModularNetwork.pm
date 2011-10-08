@@ -190,8 +190,8 @@ sub umode_o_in {
 
 sub umode_o_out {
 	my $net = $_[0];
-	my $visible = 0;
-	# my $visible = Setting::get(oper_visibility => $net);
+	my $visible = $Janus::operlvl;
+	$visible = Setting::get(oper_visibility => $net) if Setting::get(oper_visibility => $net) < $visible;
 	return () unless $visible;
 	return 'oH' if $visible == 1 && $net->hook(umode_in => 'H');
 	return 'o';

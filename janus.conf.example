@@ -31,15 +31,22 @@ set {
 	# Forced Network Tagging - this will force network tags for all users
 	# connected via janus to your network and may resolve common nick colission
 	# issues if janus' default detection methods fails for some reason.
-	# tagall 1
+	#tagall 1
+
+	# Oper Visibity Level - Controls how oper statuses is shared across Janus linked
+	# networks. Leave this commented out or set it to 0 to keep opers in /lusers down.
+	# 0 - Disables all Oper Status Sharing
+	# 1 - Adds +H (hide oper stats mode) to all Opers it shares
+	# 2 - Complete Oper Status Sharing without restrictions
+	#operlvl 0
 
 	# Run mode - process execution style
 	#  mplex - Handle SSL and sockets using C; allows for perl process to be
 	#	transparently restarted if perl's memory allocation gets too large
 	#  uproc - Handle sockets internally to the worker process
 	# If "-daemon" is appended, janus will daemonize and optionally record its PID
-	# pidfile janus.pid
-	# runmode uproc-daemon
+	#pidfile janus.pid
+	#runmode uproc-daemon
 
 	# Other parameters as defined by modules may be present here
 	# Example: Commands::Debug takes a date-based format for the dump files
@@ -48,8 +55,8 @@ set {
 	# SSL certificate. Only required if you are using an SSL server port,
 	# but will be presented as client certificates on connections
 	# These can be overridden in an individual link block
-	ssl_certfile janus-cert.pem
-	ssl_keyfile janus-key.pem
+	#ssl_certfile janus-cert.pem
+	#ssl_keyfile janus-key.pem
 	# Certificate Authority to verify certificates against - incoming and outgoing
 	#ssl_cafile janus-cert.pem
 }
