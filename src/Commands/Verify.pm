@@ -143,7 +143,7 @@ sub v_chan {
 
 	if (@nicks == 0) {
 		if (!$chan->get_mode('permanent')) {
-			push @err, "Channel $$chan empty but not permanent; found in $path";
+#			push @err, "Channel $$chan empty but not permanent; found in $path";
 		} elsif (!Modes::implements($chan->homenet, 'permanent')) {
 			push @err, "Channel $$chan empty without permchan support; found in $path";
 		}
