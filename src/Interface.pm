@@ -381,13 +381,12 @@ to the given destination
 sub jmsg {
 	my $dst = shift;
 	return unless $dst && ref $dst;
-	my usermsg = $Conffile::netconf{set}{janus_umsg} || 'NOTICE';
-	if $usermsg {
-		if ($usermsg == 'PRIVMSG' || $usermsg == 'privmsg') {
-			$usermsg = 'PRIVMSG';
+	if ($Conffile::netconf{set}{janus_umsg}) {
+		if ($Conffile::netconf{set}{janus_umsg} == 'PRIVMSG' || $Conffile::netconf{set}{janus_umsg} == 'privmsg') {
+			my $usermsg = 'PRIVMSG';
 		}
 	} else {
-		$usermsg = 'NOTICE';
+		my $usermsg = 'NOTICE';
 	}
 	my $type =
 		$dst->isa('Nick') ? $usermsg :
