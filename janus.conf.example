@@ -21,12 +21,6 @@ set {
 	#janus_ident janus
 	#janus_host services
 
-	# Janus interface message type - This controls how janus sends messages
-	# from the Janus Interface Bot to the user. Default is NOTICE.
-	#  NOTICE - Sends Janus interface messages as notices to the user.
-	#  PRIVMSG - Sends Janus interface message as a private message to the user.
-	janus_umsg NOTICE
-
 	# Administrator password - if set, this enables an "admin" account with 
 	# full access to all commands. Once you have created normal accounts,
 	# this should be disabled as the password is stored in plaintext.
