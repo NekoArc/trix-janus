@@ -15,8 +15,17 @@ set {
 	save janus.dat
 
 	# Janus nick - change this if you want a different interface nick
-	# ident and host are similarly settable
+	# Janus ident - change this if you want a different interface ident
+	# Janus host - change this if you want a different interface vhost
 	janus_nick janus
+	#janus_ident janus
+	#janus_host services
+
+	# Janus interface message type - This controls how janus sends messages
+	# from the Janus Interface Bot to the user. Default is NOTICE.
+	#  NOTICE - Sends Janus interface messages as notices to the user.
+	#  PRIVMSG - Sends Janus interface message as a private message to the user.
+	janus_umsg NOTICE
 
 	# Administrator password - if set, this enables an "admin" account with 
 	# full access to all commands. Once you have created normal accounts,
@@ -71,6 +80,7 @@ modules {
 	Modules::Global
 	Modules::Signals
 	Modules::Spamfilter
+	Modules::Services
 }
 
 # Log blocks
