@@ -115,7 +115,7 @@ sub read_conf {
 	}
 	unless (defined($Janus::tagall)) {
 		my $tag = $newconf{set}{tagall} || 0;
-		if ($tag = 1 or $tag = 0) {
+		if ($tag == 1 or $tag == 0) {
 			$Janus::tagall = $tag;
 		}
 		else {

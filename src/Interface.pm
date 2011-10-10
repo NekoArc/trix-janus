@@ -382,8 +382,10 @@ sub jmsg {
 	my $dst = shift;
 	return unless $dst && ref $dst;
 	my usermsg = $Conffile::netconf{set}{janus_umsg} || 'NOTICE';
-	if $usermsg == 'PRIVMSG' || $usermsg == 'privmsg' {
-		$usermsg = 'PRIVMSG';
+	if $usermsg {
+		if ($usermsg == 'PRIVMSG' || $usermsg == 'privmsg') {
+			$usermsg = 'PRIVMSG';
+		}
 	} else {
 		$usermsg = 'NOTICE';
 	}
