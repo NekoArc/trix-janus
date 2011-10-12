@@ -59,8 +59,7 @@ sub request_nick {
 		$tagged = 1 if $tagre && $$nick != 1 && $given =~ /^$tagre$/i;
 
 		# Let's be less destructive than ircreview...
-		my $tagemall = $Janus::tagalll;
-		$tagged = 1 if $tagemall;
+		$tagged = 1 if $Janus::tagall;
 
 		if ($tagged) {
 			my $tagsep = Setting::get(tagsep => $net);
