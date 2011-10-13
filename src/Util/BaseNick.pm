@@ -61,18 +61,16 @@ sub request_nick {
 		# Let's be less destructive than ircreview...
 		$tagged = 1 if $Janus::tagall;
 
-		if ($tagged) {
+		if ($tagged && $nick->homenet()->name() != 'janus') {
 			my $tagsep = Setting::get(tagsep => $net);
 			my $tag = $tagsep . $nick->homenet()->name();
 			my $i = 0;
 			$given = substr($reqnick, 0, $maxlen - length $tag) . $tag;
 			$given_lc = $net->lc($given);
 			while (exists $nicks[$$net]->{$given_lc}) {
-				if ($nick->homenet()->name() != 'janus') {
-					my $itag = $tagsep.(++$i).$tag;
-					$given = substr($reqnick, 0, $maxlen - length $itag) . $itag;
-					$given_lc = $net->lc($given);
-				}
+				my $itag = $tagsep.(++$i).$tag;
+				$given = substr($reqnick, 0, $maxlen - length $itag) . $itag;
+				$given_lc = $net->lc($given);
 			}
 		}
 	}
