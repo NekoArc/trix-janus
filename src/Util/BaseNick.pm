@@ -61,7 +61,7 @@ sub request_nick {
 		# Let's be less destructive than ircreview...
 		$tagged = 1 if $Janus::tagall;
 
-		if ($tagged && $Conffile::netconf{set}{janus_nick} ne $nick) {
+		if ($tagged) {
 			my $tagsep = Setting::get(tagsep => $net);
 			my $tag = $tagsep . $nick->homenet()->name();
 			my $i = 0;
