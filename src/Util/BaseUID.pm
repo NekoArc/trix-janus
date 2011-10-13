@@ -134,9 +134,11 @@ sub _request_nick {
 		$given = substr($reqnick, 0, $maxlen - length $tag) . $tag;
 		$given_lc = $net->lc($given);
 		while (exists $nick2uid[$$net]->{$given_lc}) {
-			my $itag = $tagsep.(++$i).$tag; # it will find a free nick eventually...
-			$given = substr($reqnick, 0, $maxlen - length $itag) . $itag;
-			$given_lc = $net->lc($given);
+			if ($nick->homenet()->name() != 'janus') {
+				my $itag = $tagsep.(++$i).$tag; # it will find a free nick eventually...
+				$given = substr($reqnick, 0, $maxlen - length $itag) . $itag;
+				$given_lc = $net->lc($given);
+			}
 		}
 	}
 	($given,$given_lc);

@@ -68,9 +68,11 @@ sub request_nick {
 			$given = substr($reqnick, 0, $maxlen - length $tag) . $tag;
 			$given_lc = $net->lc($given);
 			while (exists $nicks[$$net]->{$given_lc}) {
-				my $itag = $tagsep.(++$i).$tag;
-				$given = substr($reqnick, 0, $maxlen - length $itag) . $itag;
-				$given_lc = $net->lc($given);
+				if ($nick->homenet()->name() != 'janus') {
+					my $itag = $tagsep.(++$i).$tag;
+					$given = substr($reqnick, 0, $maxlen - length $itag) . $itag;
+					$given_lc = $net->lc($given);
+				}
 			}
 		}
 	}
