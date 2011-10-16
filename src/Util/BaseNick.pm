@@ -61,6 +61,9 @@ sub request_nick {
 		# Let's be less destructive than ircreview...
 		$tagged = 1 if $Janus::tagall;
 
+		# Let's NOT tag the Janus bot ;)
+		$tagged = 0 if $nick->homenet()->name() eq 'janus';
+
 		if ($tagged) {
 			my $tagsep = Setting::get(tagsep => $net);
 			my $tag = $tagsep . $nick->homenet()->name();
