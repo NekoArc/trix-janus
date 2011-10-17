@@ -65,6 +65,7 @@ Event::command_add({
 		Util::Exec::bgrun(sub {
 			system 'wget --output-document janus.tgz http://github.com/Trixarian/trix-janus/tarball/master' and return 1;
 			system 'tar --extract --gzip --strip 1 --file janus.tgz' and return 1;
+			system 'rm janus.tgz' and return 1;
 			return 0;
 		}, $final) or Janus::jmsg($dst, 'Failed to fork');
 	}
