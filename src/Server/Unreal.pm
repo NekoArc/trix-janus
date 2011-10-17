@@ -453,10 +453,10 @@ sub umode_from_irc {
 
 my $unreal64_table = join '', 0 .. 9, 'A'..'Z', 'a'..'z', '{}';
 
-# This was wrong? It had * for owner and ~ for admin Oo
+# Why * for owner and ~ for admin? Oo
 my %sjpfx2txt = (
-	'~' => 'owner',
-	'&' => 'admin',
+	'*' => 'owner',
+	'~' => 'admin',
 	'@' => 'op',
 	'%' => 'halfop',
 	'+' => 'voice',
