@@ -968,7 +968,7 @@ $moddef{CORE} = {
 	JNETLINK => sub {
 		my($net,$act) = @_;
 		my $new = $act->{net};
-		my $jid = $new->id().'.ircreview.com';
+		my $jid = $new->id().'.janus';
 		$net->ncmd(SID => $jid, 1, $new, 'Inter-Janus link');
 	}, NETLINK => sub {
 		my($net,$act) = @_;
@@ -978,7 +978,7 @@ $moddef{CORE} = {
 			for my $ij (values %Janus::ijnets) {
 				next unless $ij->is_linked();
 				next if $ij eq $RemoteJanus::self;
-				my $jid = $ij->id().'.ircreview.com';
+				my $jid = $ij->id().'.janus';
 				push @out, $net->ncmd(SID => $jid, 1, $ij, 'Inter-Janus link');
 			}
 			for my $id (keys %Janus::nets) {
@@ -1013,7 +1013,7 @@ $moddef{CORE} = {
 	}, JNETSPLIT => sub {
 		my($net,$act) = @_;
 		my $gone = $act->{net};
-		my $jid = $gone->id().'.ircreview.com';
+		my $jid = $gone->id().'.janus';
 		my $msg = $act->{msg} || 'Excessive Core Radiation';
 		return (
 			$net->ncmd(SQUIT => $jid, $msg),
