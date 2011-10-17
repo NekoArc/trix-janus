@@ -91,7 +91,7 @@ Event::hook_add(
 				ident => ($Conffile::netconf{set}{janus_ident} || 'janus'),
 				host => ($Conffile::netconf{set}{janus_rhost} || 'services.janus'),
 				vhost => ($Conffile::netconf{set}{janus_host} || 'service'),
-				name => 'Janus Control Interface',
+				name => ($Conffile::netconf{set}{janus_name} || 'Janus Control Interface'),
 				opertype => 'Janus Service',
 				signonts => $^T,
 				noquit => 1,

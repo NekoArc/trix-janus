@@ -14,11 +14,15 @@ set {
 	# state (such as the list of shared channels) between runs
 	save janus.dat
 
-	# Janus nick - change this if you want a different interface nick
-	# Janus ident - change this if you want a different interface ident
-	# Janus host - change this if you want a different interface vhost
+	# Janus nick - Change this if you want a different interface nick
+	# Janus ident - Change this if you want a different interface ident
+	# Janus name - Change this if you want a different interface real name
+	# Janus host (rhost) - Change this if you want a different interface host
+	# Janus vhost (host) - Change this if you want a different interface vhost
 	janus_nick janus
 	#janus_ident janus
+	#janus_name 'Janus Control Interface'
+	#janus_rhost services.janus
 	#janus_host services
 
 	# Administrator password - if set, this enables an "admin" account with 
