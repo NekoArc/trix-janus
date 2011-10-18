@@ -201,7 +201,7 @@ sub umode_o_out {
 	} else {
 		return '';
 	}
-#	return '' unless $visible;
+#	return () unless $visible;
 #	return 'oH' if $visible == 1 && $net->hook(umode_in => 'H');
 #	return 'o';
 }

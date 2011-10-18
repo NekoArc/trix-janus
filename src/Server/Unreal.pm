@@ -559,7 +559,6 @@ $moddef{'CORE-2309'} = {
 };
 $moddef{CORE} = {
 	umode => { qw/
-		o oper
 		S service
 		H hideoper
 		W whois_notice
