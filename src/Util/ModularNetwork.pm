@@ -193,7 +193,7 @@ sub umode_o_out {
 	my $visible = $Janus::operlvl;
 	$visible = Setting::get(oper_visibility => $net) if Setting::get(oper_visibility => $net) < $visible;
 	if ($visible) {
-		if $visible == 1 && $net->hook(umode_in => 'H') {
+		if ($visible == 1 && $net->hook(umode_in => 'H')) {
 			return 'oH';
 		} else {
 			return 'o';
