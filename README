@@ -40,6 +40,12 @@ Modules::KeepMode
   Stores the modes of a channel and restores them on a relink.
   Useful if you use "setmode" to change mode not available on the home network's ircd.
 
+Modules::Qline
+  Caches Q-lines for all networks, and optionally applies them to
+  incoming nicks. This module must be loaded when janus starts to cache all
+  lines; if loaded while running, it will only cache new lines, or will learn of
+  all lines on the next netsplit.
+
 Modules::Services
   Prevents communcation to and from remote services, and prevents services kills
   from being translated into kicks unless they are repeated.
@@ -56,12 +62,6 @@ Modules::WhoisFilter
   an annoyance because opers may not even be able to see a nick that can /whois
   them, and are often not interested in the activity of users not on their
   network.
-
-Modules::Qline
-  Caches Q-lines for all networks, and optionally applies them to
-  incoming nicks. This module must be loaded when janus starts to cache all
-  lines; if loaded while running, it will only cache new lines, or will learn of
-  all lines on the next netsplit.
 
 
 If you make changes to any of the modules in janus, in order to comply with the

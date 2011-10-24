@@ -76,9 +76,11 @@ modules {
 	Modules::Ban
 	Modules::Claim
 	Modules::Global
+	Modules::Qline
 	Modules::Signals
-	Modules::Spamfilter
 	Modules::Services
+	Modules::Spamfilter
+	Modules::WhoisFilter
 }
 
 # Log blocks
