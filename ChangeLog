@@ -16,3 +16,4 @@ A Change Log without the white noise:
 * Fixed the bug I caused with Unreal.pm earlier - chan ops sharing works like expected now ;)
 * Updated the README and janus.conf.example to mention and include the above changes.
 * Upped InterJanus' Clock desync allowed from 20 or less to 75 or less.
+* Made the ForceTag command remove tags from a user when TagAll is enabled.
