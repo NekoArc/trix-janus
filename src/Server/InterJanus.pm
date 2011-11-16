@@ -262,7 +262,7 @@ sub parse {
 			$err = "Unknown InterJanus server $id";
 		} elsif ($Janus::ijnets{$id} && $Janus::ijnets{$id} ne $ij) {
 			$err = "Already connected";
-		} elsif ($ts_delta >= 20) {
+		} elsif ($ts_delta >= 75) {
 			$err = "Clocks are too far off (delta=$ts_delta here=$Janus::time there=$act->{ts})";
 		} elsif (!$ij->checkpass($act)) {
 			$err = "Failed authorization";
