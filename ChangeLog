@@ -15,3 +15,4 @@ A Change Log without the white noise:
 * Added ircreview's SporkIRCd module and modified it to work with the default Janus.
 * Fixed the bug I caused with Unreal.pm earlier - chan ops sharing works like expected now ;)
 * Updated the README and janus.conf.example to mention and include the above changes.
+* Upped InterJanus' Clock desync allowed from 20 or less to 75 or less.
