@@ -1,5 +1,6 @@
 Trix-janus 1.10
 ===============
+
 A Change Log without the white noise:
 -------------------------------------
 * Fixed the InspIRCd modules so they support +a and +q channel modes by default.
@@ -7,7 +8,7 @@ A Change Log without the white noise:
 * Simpified the Global Module so it uses PRIVMSG by default and added some colour to it.
 * Made the up-tar command use my github repository and it removes the tgz file it downloads after it upgrades the files.
 * Fixed the bug where Janus was sending a message to Denora everytime VERSION was run.
-* Fixed the verify bug which was checking something non-sensical (why check for channels that were not linked?).
+* Fixed the verify bug which was checking something nonsensical (why check for channels that were not linked?).
 * Standardized parts of the ClientBot module to be more like an IRC client.
 * Integrated ircreview's tagall function (setable from the conf), but less aggressively while excluding the Janus bot from being tagged.
 * Made the oper visibility (oper sharing lvl) setting configurable from the conf file and integrated it so it would work. UnrealIRCd still doesn't play nice with it though... :/
