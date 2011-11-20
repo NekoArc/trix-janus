@@ -34,8 +34,8 @@ sub mynick {
 		return undef;
 	}
 	if ($nick->homenet() ne $net) {
-		Log::err_in($net, "UID '$name' is from network '".$nick->homenet()->name().
-			"' but was sourced locally");
+	#	Log::err_in($net, "UID '$name' is from network '".$nick->homenet()->name().
+	#		"' but was sourced locally");
 		return undef;
 	}
 	return $nick;
