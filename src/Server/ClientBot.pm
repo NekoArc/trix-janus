@@ -631,6 +631,11 @@ $moddef{CORE} = {
 		my @md = @{$act->{dirs}};
 		my $i = 0;
 		while ($i < @mm) {
+			# Eh, let's just watch Janus crash if this is wrong... :P
+			unless ($ma[$i]->homenet) {
+				$i++;
+				next;
+			}
 			if (Modes::mtype($mm[$i]) eq 'n' && $ma[$i]->homenet != $net) {
 				splice @mm, $i, 1;
 				splice @ma, $i, 1;
