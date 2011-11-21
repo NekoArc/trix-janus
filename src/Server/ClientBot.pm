@@ -631,11 +631,8 @@ $moddef{CORE} = {
 		my @md = @{$act->{dirs}};
 		my $i = 0;
 		while ($i < @mm) {
-			# Eh, let's just watch Janus crash if this is wrong... :P
-			unless ($ma[$i]->homenet) {
-				$i++;
-				next;
-			}
+			# My code didn't work, so let's try avenj code...
+			unless (ref $ma and $ma->can('homenet')) { $i++ ; next }
 			if (Modes::mtype($mm[$i]) eq 'n' && $ma[$i]->homenet != $net) {
 				splice @mm, $i, 1;
 				splice @ma, $i, 1;
@@ -1109,14 +1106,15 @@ $moddef{CORE} = {
 	482 => sub { # need channel ops
 		my $net = shift;
 		my $chan = $net->chan($_[3]) or return ();
-		return +{
-			type => 'MSG',
-			src => $net,
-			dst => $chan,
-			msgtype => 'NOTICE',
-			prefix => '@',
-			msg => 'Relay bot not opped on network '.$net->name,
-		};
+		# We don't need to tell chan ops that we don't have ops!
+		#return +{
+		#	type => 'MSG',
+		#	src => $net,
+		#	dst => $chan,
+		#	msgtype => 'NOTICE',
+		#	prefix => '@',
+		#	msg => 'Relay bot not opped on network '.$net->name,
+		#};
 	},
 	477 => sub { # Need to register.
 		my $net = shift;
