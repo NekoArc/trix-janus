@@ -65,7 +65,7 @@ sub request_nick {
 		$tagged = 0 if $nick->homenet()->name() eq 'janus';
 
 		# Let's reverse forcetag's function when tagall is enabled
-		$tagged = 0 if $tagre && $Janus::tagall && $$nick != 1 && $given =~ /$tagre/;
+		$tagged = 0 if $tagre && $Janus::tagall && $$nick != 1 && $given =~ /^$tagre$/i;
 
 		if ($tagged) {
 			my $tagsep = Setting::get(tagsep => $net);

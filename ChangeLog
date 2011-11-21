@@ -19,3 +19,5 @@ A Change Log without the white noise:
 * Upped InterJanus' Clock desync allowed from 20 or less to 75 or less.
 * Made the ForceTag command remove tags from a user when TagAll is enabled.
 * Commented out an annoying (and common) error about locally done UID or nicks.
+* Fixed a minor bug with the ForceTag reversal code when TagAll is enabled.
+* Disabled a few Protocol based error message (they have nothing to do with Janus anyway...)
