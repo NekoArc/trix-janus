@@ -631,8 +631,8 @@ $moddef{CORE} = {
 		my @md = @{$act->{dirs}};
 		my $i = 0;
 		while ($i < @mm) {
-			# My code didn't work, so let's try avenj code...
-			unless (ref $ma and $ma[$i]->can('homenet')) { $i++ ; next }
+			# avenj code needs a bit of tweaking... *sigh*
+			unless (ref $ma[$i] and $ma[$i]->can('homenet')) { $i++ ; next }
 			if (Modes::mtype($mm[$i]) eq 'n' && $ma[$i]->homenet != $net) {
 				splice @mm, $i, 1;
 				splice @ma, $i, 1;
