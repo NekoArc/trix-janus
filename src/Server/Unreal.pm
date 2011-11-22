@@ -1174,7 +1174,7 @@ $moddef{CORE} = {
 		my $srv = $net->srvname($_[2]);
 		my $splitfrom = $servers[$$net]{CORE::lc $srv}{parent};
 
-		my $rextemp = quotemeta $Janus::laddy
+		my $rextemp = quotemeta $Janus::laddy;
 		if (!$splitfrom && $srv =~ /^(.*)$rextemp/) {
 			my $ns = $Janus::nets{$1} or return ();
 			$net->send($net->cmd2($net->cparam('linkname'), SERVER => $srv, 2, $net->numeric_for($ns), $ns->netname()));

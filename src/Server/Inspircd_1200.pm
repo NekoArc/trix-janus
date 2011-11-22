@@ -664,7 +664,7 @@ $moddef{CORE} = {
 	}, RSQUIT => sub {
 		my $net = shift;
 		my $src = $net->mynick($_[0]) or return ();
-		my $rextemp = quotemeta $Janus::laddy
+		my $rextemp = quotemeta $Janus::laddy;
 		$_[2] =~ /^(\S+)$rextemp$/ or return ();
 		my $dst = $1;
 		{
