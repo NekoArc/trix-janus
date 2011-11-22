@@ -22,5 +22,4 @@ A Change Log without the white noise:
 * Commented out an annoying (and common) error about locally done UID or nicks.
 * Fixed a minor bug with the ForceTag reversal code when TagAll is enabled.
 * Disabled a few Protocol based error message (they have nothing to do with Janus anyway...)
-* Fixed issue in ClientBot.pm with mode changes on non-existant networks (thanks to avenj since my code failed...)
 * Disabled the global notice sent by ClientBot.pm to all channel ops complaining that it doesn't have ops!
