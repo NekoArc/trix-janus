@@ -35,6 +35,11 @@ set {
 	#  bridge - transpaent link, all channels linked, opers are more global
 	lmode link
 
+	# Custom Domain - this will make Janus use a custom domain for Janus links
+	# in /map and /links. Please exclude the first . from the domain name.
+	# It defaults to 'janus' that displays as net.janus in /map and links.
+	#laddy gigirc.com
+
 	# Forced Network Tagging - this will force network tags for all users
 	# connected via janus to your network and may resolve common nick colission
 	# issues if janus' default detection methods fails for some reason.

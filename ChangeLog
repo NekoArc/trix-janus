@@ -23,3 +23,4 @@ A Change Log without the white noise:
 * Fixed a minor bug with the ForceTag reversal code when TagAll is enabled.
 * Disabled a few Protocol based error message (they have nothing to do with Janus anyway...)
 * Disabled the global notice sent by ClientBot.pm to all channel ops complaining that it doesn't have ops!
+* Allowed the use of a custom domain for Janus links in /map and /links with the addition of conf option laddy.
