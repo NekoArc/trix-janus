@@ -33,7 +33,7 @@ sub jlink {
 }
 
 sub jname {
-	$id[${$_[0]}].'.janus';
+	$id[${$_[0]}].$Janus::laddy;
 }
 
 sub is_linked {

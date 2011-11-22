@@ -665,7 +665,8 @@ $moddef{CORE} = {
 	}, RSQUIT => sub {
 		my $net = shift;
 		my $src = $net->mynick($_[0]) or return ();
-		$_[2] =~ /^(\S+)\.janus$/ or return ();
+		my $rextemp = quotemeta $Janus::laddy
+		$_[2] =~ /^(\S+)$rextemp$/ or return ();
 		my $dst = $1;
 		{
 			type => 'MSG',
@@ -909,7 +910,7 @@ $moddef{CORE} = {
 	JNETLINK => sub {
 		my($net,$act) = @_;
 		my $new = $act->{net};
-		my $jid = $new->id().'.janus';
+		my $jid = $new->id().$Janus::laddy;
 		($net->ncmd(SERVER => $jid, '*', 1, $new, 'Inter-Janus link'),
 		 $net->cmd2($new, VERSION => 'Interjanus'));
 	}, NETLINK => sub {
@@ -920,7 +921,7 @@ $moddef{CORE} = {
 			for my $ij (values %Janus::ijnets) {
 				next unless $ij->is_linked();
 				next if $ij eq $RemoteJanus::self;
-				my $jid = $ij->id().'.janus';
+				my $jid = $ij->id().$Janus::laddy;
 				push @out, $net->ncmd(SERVER => $jid, '*', 1, $ij, 'Inter-Janus link');
 				push @out, $net->cmd2($ij, VERSION => 'Interjanus');
 			}
@@ -959,7 +960,7 @@ $moddef{CORE} = {
 	}, JNETSPLIT => sub {
 		my($net,$act) = @_;
 		my $gone = $act->{net};
-		my $jid = $gone->id().'.janus';
+		my $jid = $gone->id().$Janus::laddy;
 		my $msg = $act->{msg} || 'Excessive Core Radiation';
 		return (
 			$net->ncmd(SQUIT => $jid, $msg),

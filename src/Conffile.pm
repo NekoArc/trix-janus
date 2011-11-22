@@ -113,6 +113,17 @@ sub read_conf {
 		Log::err("Server name not set! You need set block with a 'name' entry");
 		return;
 	}
+	unless (defined($Janus::laddy)) {
+		my $laddy = $newconf{set}{laddy} || 'janus';
+		$laddy = '.'.$laddy
+		if ($laddy) {
+			$Janus::laddy = $laddy;
+		}
+		else {
+			Log::err("Bad value $laddy for set::laddy");
+			return;
+		}
+	}
 	unless (defined($Janus::tagall)) {
 		my $tag = $newconf{set}{tagall} || 0;
 		if ($tag == 1 or $tag == 0) {

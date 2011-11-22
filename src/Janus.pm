@@ -59,6 +59,10 @@ Map of channel name to channel object. This is only used in bridge mode.
 
 Either "link" or "bridge" depending on the link mode.
 
+=item $Janus::laddy
+
+Sets the link address used in /map
+
 =item $Janus::tagall
 
 Either true or false depending on the tagall setting.

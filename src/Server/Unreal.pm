@@ -240,7 +240,7 @@ sub _connect_ifo {
 
 	my($hc, $srv) = (2,$nick->homenet()->jname());
 	$hc = 3 if $nick->jlink();
-	($hc, $srv) = (1, $net->cparam('linkname')) if $srv eq 'janus.janus';
+	($hc, $srv) = (1, $net->cparam('linkname')) if $srv eq 'janus'.$Janus::laddy;
 
 	if ($net->protoctl >= 2305) {
 		if ($ip =~ /^[0-9.]+$/) {
@@ -1174,7 +1174,8 @@ $moddef{CORE} = {
 		my $srv = $net->srvname($_[2]);
 		my $splitfrom = $servers[$$net]{CORE::lc $srv}{parent};
 
-		if (!$splitfrom && $srv =~ /^(.*)\.janus/) {
+		my $rextemp = quotemeta $Janus::laddy
+		if (!$splitfrom && $srv =~ /^(.*)$rextemp/) {
 			my $ns = $Janus::nets{$1} or return ();
 			$net->send($net->cmd2($net->cparam('linkname'), SERVER => $srv, 2, $net->numeric_for($ns), $ns->netname()));
 			my @out;
@@ -1370,7 +1371,7 @@ $moddef{CORE} = {
 		my($net,$act) = @_;
 		my $ij = $act->{net};
 		# don't bother with numerics, no users end up on these servers...
-		$net->cmd2($net->cparam('linkname'), SERVER => $ij->id().'.janus', 2, 0, 'Inter-Janus Link');
+		$net->cmd2($net->cparam('linkname'), SERVER => $ij->id().$Janus::laddy, 2, 0, 'Inter-Janus Link');
 	}, NETLINK => sub {
 		my($net,$act) = @_;
 		my $new = $act->{net};
@@ -1380,14 +1381,14 @@ $moddef{CORE} = {
 			my @out;
 			for my $ij (values %Janus::ijnets) {
 				next unless $ij->is_linked();
-				push @out, $net->cmd2($net->cparam('linkname'), SERVER => $ij->id().'.janus', 2, 0, 'Inter-Janus Link');
+				push @out, $net->cmd2($net->cparam('linkname'), SERVER => $ij->id().$Janus::laddy, 2, 0, 'Inter-Janus Link');
 			}
 			for my $id (keys %Janus::nets) {
 				$new = $Janus::nets{$id};
 				next if $new->isa('Interface') || $new eq $net;
 				my $jl = $new->jlink();
 				if ($jl) {
-					push @out, $net->cmd2($jl->id() . '.janus', SERVER => $new->jname(), 3,
+					push @out, $net->cmd2($jl->id() . $Janus::laddy, SERVER => $new->jname(), 3,
 						$net->numeric_for($new), $new->netname());
 				} else {
 					push @out, $net->cmd2($net->cparam('linkname'), SERVER => $new->jname(), 2,
@@ -1399,7 +1400,7 @@ $moddef{CORE} = {
 			return () if $net->isa('Interface');
 			my $jl = $new->jlink();
 			if ($jl) {
-				$net->cmd2($jl->id() . '.janus', SERVER => $new->jname(), 3, $net->numeric_for($new), $new->netname());
+				$net->cmd2($jl->id() . $Janus::laddy, SERVER => $new->jname(), 3, $net->numeric_for($new), $new->netname());
 			} else {
 				$net->cmd2($net->cparam('linkname'), SERVER => $new->jname(), 2, $net->numeric_for($new), $new->netname());
 			}
@@ -1428,7 +1429,7 @@ $moddef{CORE} = {
 		my $msg = $act->{msg} || 'Excessive Core Radiation';
 		(
 			$net->cmd1(SMO => 'o', "(\002delink\002) InterJanus Network $id has delinked: $msg"),
-			$net->cmd1(SQUIT => "$id.janus", $msg),
+			$net->cmd1(SQUIT => "$id.$Janus::laddy", $msg),
 		);
 	}, CONNECT => sub {
 		my($net,$act) = @_;
