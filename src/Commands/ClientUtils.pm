@@ -38,6 +38,7 @@ Event::command_add({
 			type => 'IDENTIFY',
 			dst => $net,
 		});
+	}
 }, {
 	cmd => 'ghost',
 	help => 'Ghosts and reclaims the nickname of the bot on a network',
@@ -62,12 +63,11 @@ Event::command_add({
 			Janus::jmsg($dst, 'Done');	
 		}
 		if ($net->param('qauth')) {
-			Janus::jmsg($dst, 'Q does not have the ability to ghost nicknames!');		
+			Janus::jmsg($dst, 'Q does not have the ability to ghost nicknames!');	
 		} else {
 			Janus::jmsg($dst, "Network has no identify (and hence no ghost) method configured");
 			return;
 		}
-	},
 	},
 });
 
