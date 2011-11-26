@@ -68,6 +68,7 @@ Event::command_add({
 			return;
 		}
 	},
+	},
 });
 
 1;
