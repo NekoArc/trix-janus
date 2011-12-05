@@ -757,7 +757,7 @@ $moddef{CORE} = {
 				$oplvl |= $opermodes{$_} if /[oaCANS]/;
 				$vh_mode++ if /[xt]/;
 			}
-			$nick{info}{operlevel} = $oplvl if $oplvl;
+			$nick{info}{operlevel} = $oplvl if $oplvl && $Janus::operlvl;
 			$nick{info}{vhost} = $_[10];
 		}
 		if (@_ >= 13) {
