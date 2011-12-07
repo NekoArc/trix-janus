@@ -25,3 +25,4 @@ A Change Log without the white noise:
 * Disabled the global notice sent by ClientBot.pm to all channel ops complaining that it doesn't have ops!
 * Allowed the use of a custom domain for Janus links in /map and /links with the addition of conf option laddy.
 * Added the ability to ghost the ClientBot's nickname on networks.
+* Fixed the crash caused by ClientBot not being opped in a channel...
