@@ -118,32 +118,26 @@ sub process_capabs {
 		push @ltype, 'n';
 		push @ttype, 'n';
 	}
+#	if (@g == 5) {
+#		my %c2t;
+#		my %t2c;
+#		for my $i (0..$#g) {
+#			for (split //, $g[$i]) {
+#				my $name = $ltype[$i].'__'.$ttype[$i].($_ eq CORE::lc $_ ? 'l' : 'u').(CORE::lc $_);
 
-=todo
+#				my $def = $def_c2t{$_};
+#				if ($def && $def =~ /^._(.*)/ && Modes::mtype($1) eq $ttype[$i]) {
+#					$name = $ltype[$i].'_'.$1;
+#				}
 
-	if (@g == 5) {
-		my %c2t;
-		my %t2c;
-		for my $i (0..$#g) {
-			for (split //, $g[$i]) {
-				my $name = $ltype[$i].'__'.$ttype[$i].($_ eq CORE::lc $_ ? 'l' : 'u').(CORE::lc $_);
-
-				my $def = $def_c2t{$_};
-				if ($def && $def =~ /^._(.*)/ && Modes::mtype($1) eq $ttype[$i]) {
-					$name = $ltype[$i].'_'.$1;
-				}
-
-				$c2t{$_} = $name;
-				$t2c{$name} = $_;
-			}
-		}
-		$t2c{n_op} = 'o';
-	} else {
-		Log::warn_in($net, 'No 005 CHANMODES/PREFIX, assuming RFC1459 modes');
-	}
-
-=cut
-
+#				$c2t{$_} = $name;
+#				$t2c{$name} = $_;
+#			}
+#		}
+#		$t2c{n_op} = 'o';
+#	} else {
+#		Log::warn_in($net, 'No 005 CHANMODES/PREFIX, assuming RFC1459 modes');
+#	}
 	my $um = $capabs[$$net]{' umodes'} || '';
 	$net->send('PROTOCTL NAMESX') if $capabs[$$net]{NAMESX};
 	$net->send("MODE ".$self[$$net].' +B') if $um =~ /B/;
