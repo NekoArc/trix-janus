@@ -1105,25 +1105,6 @@ $moddef{CORE} = {
 	495 => \&delink_cancel_join,
 	520 => \&delink_cancel_join,
 	482 => \&ignore, # We really don't need to tell chanops we don't have ops!
-
-=todo
-
-	482 => sub { # need channel ops
-		my $net = shift;
-		my $chan = $net->chan($_[3]) or return ();
-		# We don't need to tell chan ops that we don't have ops!
-		return +{
-			type => 'MSG',
-			src => $net,
-			dst => $chan,
-			msgtype => 'NOTICE',
-			prefix => '@',
-			msg => 'Relay bot not opped on network '.$net->name,
-		};
-	},
-
-=cut
-
 	477 => sub { # Need to register.
 		my $net = shift;
 		my @out;
