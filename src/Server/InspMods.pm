@@ -176,7 +176,7 @@ mdef 'm_conn_umodes.so';
 mdef 'm_conn_waitpong.so';
 mdef 'm_connflood.so';
 mdef 'm_commonchans.so', umode => { c => 'deaf_commonchan' };
-mdef 1201, 'm_customprefix.so', cmode => { a => 'n_admin', 'q' => 'n_owner', 'h' => 'n_halfop' }; # TODO read prefixes from CAPAB for PREFIX (miniCruzer)
+mdef 1201, 'm_customprefix.so';
 mdef 'm_customtitle.so', metadata => {
 	ctitle => sub {
 		my $net = shift;
@@ -257,7 +257,6 @@ mdef 'm_http_client.so';
 mdef 'm_httpd.so';
 mdef 'm_httpd_stats.so';
 mdef 'm_ident.so';
-
 mdef 'm_invisible.so';
 mdef 'm_inviteexception.so',
 	cmode_in => {

@@ -43,10 +43,14 @@ set {
 	# Forced Network Tagging - this will force network tags for all users
 	# connected via janus to your network and may resolve common nick colission
 	# issues if janus' default detection methods fails for some reason.
+	# Note: Enabling tagall reverses how the forcetag command works. Forcetag will
+	# now disable tagging for that network when tagall is enabled.
 	#tagall 1
 
 	# Oper Visibity Level - Controls how oper statuses is shared across Janus linked
 	# networks. Leave this commented out or set it to 0 to keep opers in /lusers down.
+	# Note: Level 0 doesn't work with UnrealIRCd... yet ;)
+	# Note: This can be overridden on a per network basis using the set oper_visibilty.
 	# 0 - Disables all Oper Status Sharing
 	# 1 - Adds +H (hide oper stats mode) to all Opers it shares
 	# 2 - Complete Oper Status Sharing without restrictions
@@ -57,6 +61,8 @@ set {
 	#	transparently restarted if perl's memory allocation gets too large
 	#  uproc - Handle sockets internally to the worker process
 	# If "-daemon" is appended, janus will daemonize and optionally record its PID
+	# Note: If you don't know what the above means just leave these two commented
+	# out to use the default settings.
 	#pidfile janus.pid
 	#runmode uproc-daemon
 
@@ -129,6 +135,8 @@ listen 1.2.3.4:8006
 
 # Network link block - one block is required per network
 # link <netid>
+# Note: It's recommended that netid be short (between 3-5 characters) since
+# they're used with network tags.
 link u3 {
 	# Server type. This is a module in the Server package
 	type Unreal
