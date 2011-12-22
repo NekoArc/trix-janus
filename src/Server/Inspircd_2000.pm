@@ -9,7 +9,7 @@ use Util::ModularNetwork;
 use Server::InspMods;
 use Util::Crypto;
 
-use Persist 'Util::BaseUID', 'Util::BaseParser', 'Util::ModularNetwork', 'Server::InspMods';
+use Persist 'Util::BaseUID', 'Util::BaseParser', 'Util::ModularNetwork';
 use strict;
 use warnings;
 use integer;

@@ -29,3 +29,6 @@ A Change Log without the white noise:
 * Started splitting the (sparce) documentation into seperate files and moved them to /docs.
 * Updated the conf's commets to warn new users about certain features.
 * Removed the broken ghost command and disabled that damn annoying notice about modules mismatch...
+* Fixed that annoyingly persistant ClientBot error message.
+* Fixed ClientBot's annoying habit of sending CTCP Versions between two people as privmsg (now it ignores it).
+* Fixed the permissions issue I created...
