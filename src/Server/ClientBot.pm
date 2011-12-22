@@ -628,11 +628,12 @@ $moddef{CORE} = {
 			# avenj code needs a bit of tweaking... *sigh*
 			# This seems to break way too much shit...
 			#unless (ref $ma[$i] and $ma[$i]->can('homenet')) { $i++ ; next }
-			if (Modes::mtype($mm[$i]) eq 'n' && $ma[$i]->homenet != $net) {
-				splice @mm, $i, 1;
-				splice @ma, $i, 1;
-				splice @md, $i, 1;
-			} elsif ($mm[$i] eq 'cb_modesync' && $md[$i] eq '+') {
+#			if (Modes::mtype($mm[$i]) eq 'n' && $ma[$i]->homenet != $net) {
+#				splice @mm, $i, 1;
+#				splice @ma, $i, 1;
+#				splice @md, $i, 1;
+#			} 
+			if ($mm[$i] eq 'cb_modesync' && $md[$i] eq '+') {
 				my @modes = $net->cmode_to_irc($chan, Modes::delta(undef, $chan), $capabs[$$net]{MODES});
 				return map $net->cmd1(MODE => $chan, @$_), @modes;
 			} else {
