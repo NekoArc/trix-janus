@@ -39,36 +39,6 @@ Event::command_add({
 			dst => $net,
 		});
 	}
-}, {
-	cmd => 'ghost',
-	help => 'Ghosts and reclaims the nickname of the bot on a network',
-	section => 'Network',
-	syntax => '<network>',
-	acl => 'ghost',
-	api => '=replyto localnet',
-	code => sub {
-		my($dst, $net) = @_;
-		return Janus::jmsg($dst, "Network must be a ClientBot.") unless $net->isa('Server::ClientBot');
-		if ($net->param('nspass')) {
-			$net->send("PRIVMSG NickServ :GHOST $net->param('nick') $net->param('nspass')");
-			$net->send("NICK $net->param('nick')");
-			# Let's identify again
-			$net->send("PRIVMSG NickServ :IDENTIFY $net->param('nspass')");
-			Janus::jmsg($dst, 'Done');
-		}
-		if ($net->param('x3acct')) {
-			$net->send("PRIVMSG AuthServ :GHOST $net->param('nick')");
-			$net->send("NICK $net->param('nick')");
-			# X3 expects us to be logged into the account to ghost, so no need to auth again
-			Janus::jmsg($dst, 'Done');	
-		}
-		if ($net->param('qauth')) {
-			Janus::jmsg($dst, 'Q does not have the ability to ghost nicknames!');	
-		} else {
-			Janus::jmsg($dst, "Network has no identify (and hence no ghost) method configured");
-			return;
-		}
-	},
 });
 
 1;
