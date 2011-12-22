@@ -407,10 +407,9 @@ sub pm_not {
 			}
 		}
 		if ($_[1] eq 'PRIVMSG') {
-                        if ($_[1] =~ m/^\001/)
-                        {
-                          return; # CTCP, ignoring
-                        }
+			if ($_[1] =~ m/^\001/) {
+				return; # CTCP, ignoring
+			}
 			$net->send("NOTICE $_[0] :Error: user not found. To message a user, prefix your message with their nick");
 		} elsif ($_[1] eq 'NOTICE') {
 			if ($net->lc($_[0]) eq 'nickserv') {
@@ -597,6 +596,8 @@ $moddef{CORE} = {
 			$nick = $src->homenick . '/' . $src->homenet->name if !defined $nick;
 			if ($msg =~ /^\001ACTION (.*?)\001?$/) {
 				return "$type $dstr :* $nick $1";
+			} elsif ($msg =~ m/^\001/) {
+				return; # CTCP, ignoring
 			} else {
 				return "$type $dstr :<$nick> $msg";
 			}
