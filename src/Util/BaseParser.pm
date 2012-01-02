@@ -4,7 +4,7 @@ package Util::BaseParser;
 use LocalNetwork;
 use Persist 'LocalNetwork';
 use strict;
-#use warnings;
+use warnings;
 
 our @rawout;
 Persist::register_vars(qw(rawout));
