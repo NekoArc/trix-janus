@@ -3,7 +3,7 @@
 package Util::BaseParser;
 use LocalNetwork;
 use Persist 'LocalNetwork';
-use strict;
+#use strict;
 use warnings;
 
 our @rawout;
@@ -145,7 +145,7 @@ sub cmode_from_irc {
 		}
 		$_->($net, $pm, $chan, \@_, \@modes, \@args, \@dirs) for $net->hook(cmode_in => $_);
 	}
-	(\@modes, \@args, \@dirs, \@_);
+	(\@modes, \@args, \@dirs, @_);
 }
 
 sub cmode_to_irc {
