@@ -491,7 +491,6 @@ $moddef{CORE} = {
 		my $chan = $net->chan($_[2]) or return ();
 		my $ts = $_[3];
 		return () if $ts > $chan->ts();
-		return () unless $chan->homenet == $net;
 		my($modes,$args,$dirs) = $net->cmode_from_irc($chan, @_[4 .. $#_]);
 		return +{
 			type => 'MODE',
