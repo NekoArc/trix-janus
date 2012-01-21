@@ -149,7 +149,7 @@ sub _connect_ifo {
 		$visible = Setting::get(oper_visibility => $net) if Setting::get(oper_visibility => $net) < $visible;
 		$visible = 3 if $nick == $Interface::janus;
 		my $suffix = $visible < 3 ? ' (remote)' : '';
-		if ($visible == 1 || $visible == 0) {
+		if ($visible == 1) {
 			my $ho = $net->umode_to_irc([ 'hideoper' ], $nick);
 			$mode .= $ho if defined $ho && -1 == index $mode, $ho;
 		}
@@ -1064,7 +1064,7 @@ $moddef{CORE} = {
 			my @out;
 			my $mch = '-o';
 			my $suffix = $visible < 3 ? ' (remote)' : '';
-			if (($visible == 1 || $visible == 0) && $net->hook('cmode_out', 'hideoper')) {
+			if (($visible == 1) && $net->hook('cmode_out', 'hideoper')) {
                 push @out, $net->cmd2($act->{dst}, MODE => $act->{dst}, '+H');
 			}
 			my $len = $net->nicklen() - length $suffix;

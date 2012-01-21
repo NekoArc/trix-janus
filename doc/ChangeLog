@@ -16,7 +16,6 @@ A Change Log without the white noise:
 * Added more configuration options for the Janus controller bot - now you can set EVERYTHING about it ;)
 * Added ircreview's SporkIRCd module and modified it to work with the default Janus.
 * Fixed the bug I caused with Unreal.pm earlier - chan ops sharing works like expected now ;)
-* Updated the README and janus.conf.example to mention and include the above changes.
 * Upped InterJanus' Clock desync allowed from 20 or less to 75 or less.
 * Made the ForceTag command remove tags from a user when TagAll is enabled.
 * Commented out an annoying (and common) error about locally done UID or nicks.
@@ -24,11 +23,9 @@ A Change Log without the white noise:
 * Disabled a few Protocol based error message (they have nothing to do with Janus anyway...)
 * Disabled the global notice sent by ClientBot.pm to all channel ops complaining that it doesn't have ops!
 * Allowed the use of a custom domain for Janus links in /map and /links with the addition of conf option laddy.
-* Added the ability to ghost the ClientBot's nickname on networks.
 * Fixed the crash caused by ClientBot not being opped in a channel...
 * Started splitting the (sparce) documentation into seperate files and moved them to /docs.
 * Updated the conf's commets to warn new users about certain features.
-* Removed the broken ghost command and disabled that damn annoying notice about modules mismatch...
+* Disabled that damn annoying notice about modules mismatch with InspIRCd when you switch the connection over from ClientBot...
 * Fixed that annoyingly persistant ClientBot error message.
 * Fixed ClientBot's annoying habit of sending CTCP Versions between two people as privmsg (now it ignores it).
-* Fixed the permissions issue I created...
