@@ -559,7 +559,6 @@ $moddef{'CORE-2309'} = {
 };
 $moddef{CORE} = {
 	umode => { qw/
-		o oper
 		S service
 		H hideoper
 		W whois_notice
@@ -578,9 +577,9 @@ $moddef{CORE} = {
 	umode_in => {
 		o => \&Util::ModularNetwork::umode_o_in,
 	},
-	umode_out => {
-		oper => \&Util::ModularNetwork::umode_o_out,
-	},
+#	umode_out => {
+#		oper => \&Util::ModularNetwork::umode_o_out,
+#	},
 	cmode => { qw/
 		v n_voice
 		h n_halfop
