@@ -2,6 +2,11 @@
 #
 # This is a line-based configuation file, divided into blocks for networks
 # and other grouped settings.
+#
+# GENERAL RULE: If you don't know what it does then just leave it alone. 
+#               The default setting should work without any trouble.
+#               This however doesn't count for server blocks.
+#
 
 # Set block: settings for the janus server itself
 set {
@@ -37,7 +42,8 @@ set {
 
 	# Custom Domain - this will make Janus use a custom domain for Janus links
 	# in /map and /links. Please exclude the first . from the domain name.
-	# It defaults to 'janus' that displays as net.janus in /map and links.
+	# It defaults to 'janus' that displays as net.janus in /map and /links.
+	# This works without problems in an InterJanus setup.
 	#laddy gigirc.com
 
 	# Forced Network Tagging - this will force network tags for all users
@@ -49,7 +55,7 @@ set {
 
 	# Oper Visibity Level - Controls how oper statuses is shared across Janus linked
 	# networks. Leave this commented out or set it to 0 to keep opers in /lusers down.
-	# Note: Level 0 doesn't work with UnrealIRCd... yet ;)
+	# Note: This doesn't work with UnrealIRCd and I broke it intentionally... :P
 	# Note: This can be overridden on a per network basis using the set oper_visibilty.
 	# 0 - Disables all Oper Status Sharing
 	# 1 - Adds +H (hide oper stats mode) to all Opers it shares
