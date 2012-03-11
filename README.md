@@ -1,10 +1,7 @@
-Trix-Janus
-==========
-
 What is this?
 -------------
 
-This is a fork of the original Janus IRC Channel Linker created by Daniel de Graaf (danieldg) and later improved by Samuel J Hoffman (miniCruzer).
+This is a fork of the Janus IRC Channel Linker created by Daniel de Graaf (danieldg) which later got improved by Samuel J Hoffman (miniCruzer).
 
 What is your goal?
 ------------------
