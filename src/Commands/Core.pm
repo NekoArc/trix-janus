@@ -26,9 +26,9 @@ Event::command_add({
 			'Janus-linked networks without needing to merge all the networks and their channels.',
 			'-',
 			'The original Janus was developed by Daniel de Graaf (danieldg) and later improved by',
-			'Samuel J Hoffman (miniCruzer). The current version your using has been hacked up and',
-			'improved by Brenton Edgar Scott (Trixar_za).',
-			'If you wish to can grab your own copy of this Janus or make suggestions/bug reports,',
+			'Samuel J Hoffman (miniCruzer). The current version this network is using has been',
+			'enhanced and is currently developed by Brenton Edgar Scott (Trixar_za).',
+			'If you wish to can grab your own copy of Janus or make any suggestions/bug reports,',
 			'please visit https://github.com/trixarian/trix-janus/ to do so.',
 		);
 	}
