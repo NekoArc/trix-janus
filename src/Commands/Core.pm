@@ -22,11 +22,14 @@ Event::command_add({
 	section => 'Info',
 	code => sub {
 		Janus::jmsg($_[1],
-			'Janus is a server that allows IRC networks to share certain channels to other',
-			'linked networks without needing to share all channels and make all users visible',
-			'across both networks. If configured to allow it, users can also share their own',
-			'channels across any linked network.',
-			'The source code can be found at http://gitorious.org/janus-irc/janus',
+			'Janus is a server that allows IRC networks to share certain channels with other',
+			'Janus-linked networks without needing to merge all the networks and their channels.',
+			'-',
+			'The original Janus was developed by Daniel de Graaf (danieldg) and later improved by',
+			'Samuel J Hoffman (miniCruzer). The current version your using has been hacked up and',
+			'improved by Brenton Edgar Scott (Trixar_za).',
+			'If you wish to can grab your own copy of this Janus or make suggestions/bug reports,',
+			'please visit https://github.com/trixarian/trix-janus/ to do so.',
 		);
 	}
 }, {
