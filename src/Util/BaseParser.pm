@@ -91,10 +91,9 @@ sub cmd2 {
 	my($net,$src) = (shift,shift);
 	my $out = defined $src ? ':'.$net->_out($src).' ' : '';
 	$out .= join ' ', map { $net->_out($_) } @_;
-	# Strips the damn colour codes!
+	# Strips the damn control codes!
 	$out =~ s/\x03[0-9]{1,2}(,[0-9]{1,2})?//g;
-#	$out =~ s/\x02//g;
-#	$out =~ s/\x1F//g;
+	$out =~ s/[\x02\x1f\x16\x0f]//g;
 	$out;
 }
 
