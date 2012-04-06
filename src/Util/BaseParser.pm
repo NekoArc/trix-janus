@@ -91,6 +91,7 @@ sub cmd2 {
 	my($net,$src) = (shift,shift);
 	my $out = defined $src ? ':'.$net->_out($src).' ' : '';
 	$out .= join ' ', map { $net->_out($_) } @_;
+	$out =~ s/\x03[0-9]{1,2}(,[0-9]{1,2})?//g;
 	$out;
 }
 
