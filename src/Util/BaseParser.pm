@@ -93,8 +93,8 @@ sub cmd2 {
 	$out .= join ' ', map { $net->_out($_) } @_;
 	# Strips the damn colour codes!
 	$out =~ s/\x03[0-9]{1,2}(,[0-9]{1,2})?//g;
-	$out =~ s/\x02//g;
-	$out =~ s/\x1F//g;
+#	$out =~ s/\x02//g;
+#	$out =~ s/\x1F//g;
 	$out;
 }
 
