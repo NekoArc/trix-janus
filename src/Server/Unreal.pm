@@ -335,6 +335,9 @@ sub nc_msg {
 	return () if $_[2] eq 'AUTH' && $_[0] =~ /\./;
 	my $src = $net->item($_[0]) or return ();
 	my $msgtype = $_[1];
+	my $out = $_[3];
+	$out =~ s/\x03[0-9]{1,2}(,[0-9]{1,2})?//g;
+	$out =~ s/[\x02\x1f\x16\x0f]//g;
 	if ($_[2] =~ /^\$/) {
 		# server broadcast message. No action; these are confined to source net
 		return ();
@@ -345,7 +348,7 @@ sub nc_msg {
 			src => $src,
 			prefix => $1,
 			dst => $net->chan($2),
-			msg => $_[3],
+			msg => $out,
 			msgtype => $msgtype,
 		};
 	} elsif ($_[2] =~ /^(\S+?)(@\S+)?$/) {
@@ -357,7 +360,7 @@ sub nc_msg {
 			type => 'MSG',
 			src => $src,
 			dst => $dst,
-			msg => $_[3],
+			msg => $out,
 			msgtype => $msgtype,
 		};
 	}
