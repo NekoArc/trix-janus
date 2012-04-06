@@ -832,7 +832,7 @@ $moddef{CORE} = {
 				type => 'MSG',
 				src => $src,
 				dst => $dst,
-				msg => $out,
+				msg => $_[3],
 				msgtype => $_[1],
 			} if $dst;
 		}

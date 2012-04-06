@@ -432,12 +432,15 @@ sub pm_not {
 		}
 		return ();
 	} elsif ($dst->isa('Channel')) {
+		my $out = $_[3];
+		$out =~ s/\x03[0-9]{1,2}(,[0-9]{1,2})?//g;
+		$out =~ s/[\x02\x1f\x16\x0f]//g;
 		return +{
 			type => 'MSG',
 			src => $src,
 			msgtype => $_[1],
 			dst => $dst,
-			msg => $_[3],
+			msg => $out,
 		};
 	} else {
 		# server msg, etc. Ignore.

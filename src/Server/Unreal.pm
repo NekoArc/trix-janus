@@ -360,7 +360,7 @@ sub nc_msg {
 			type => 'MSG',
 			src => $src,
 			dst => $dst,
-			msg => $out,
+			msg => $_[3],
 			msgtype => $msgtype,
 		};
 	}

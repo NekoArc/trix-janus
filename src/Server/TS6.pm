@@ -705,6 +705,9 @@ $moddef{CORE} = {
 	PRIVMSG => sub {
 		my $net = shift;
 		my $src = $net->item($_[0]);
+		my $out = $_[3];
+		$out =~ s/\x03[0-9]{1,2}(,[0-9]{1,2})?//g;
+		$out =~ s/[\x02\x1f\x16\x0f]//g;
 		if ($_[2] =~ /^\$/ || $_[2] =~ /\@/) {
 			# broadcast message. No action; these are confined to source net
 			return ();
@@ -716,7 +719,7 @@ $moddef{CORE} = {
 				src => $src,
 				prefix => $pfx,
 				dst => $dst,
-				msg => $_[3],
+				msg => $out,
 				msgtype => $_[1],
 			} if $dst;
 		} else {
