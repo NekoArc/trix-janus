@@ -144,6 +144,16 @@ sub read_conf {
 			return;
 		}
 	}
+	unless (defined($Janus::cclvl)) {
+		my $cclvl = $newconf{set}{cclvl} || 1;
+		if ($cclvl >= 0 && $cclvl < 3) {
+			$Janus::cclvl = $cclvl;
+		}
+		else {
+			Log::err("Bad value $cclvl for set::cclvl");
+			return;
+		}
+	}
 	unless ($Janus::lmode) {
 		my $mode = lc $newconf{set}{lmode} || 'link';
 		if ($mode eq 'link') {

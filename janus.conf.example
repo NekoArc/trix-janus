@@ -61,6 +61,15 @@ set {
 	# 1 - Adds +H (hide oper stats mode) to all Opers it shares
 	# 2 - Complete Oper Status Sharing without restrictions
 	#operlvl 0
+	
+	# Control Code Level - This controls the colour and IRC control codes between Janus
+	# linked Networks. Use this to strip unwanted colours, underlines or bold from shared
+	# user's text.
+	# Note: This defaults to 1 when not set
+	# 0 - Allows Colours, Bold and Underline
+	# 1 - Removes only Colours
+	# 2 - Removes all Colours, Bold and Underline
+	#cclvl 1
 
 	# Run mode - process execution style
 	#  mplex - Handle SSL and sockets using C; allows for perl process to be
@@ -191,14 +200,8 @@ link u3 {
 # Link block for an InspIRCd 1.1 server
 # (protocol details, module list, etc are autonegotiated on connect)
 link i1 {
-	type Inspircd_1105
-	# Fallback links: Any parameter that ends in ".1" is changed depending
-	# on which server we are connecting to. Servers are tried in round-robin
-	# fashion, with server 1 always being tried first.
-	linkaddr.1 4.2.2.2
-	linkaddr.2 4.2.2.3
-	# other paramaters can be specified without the link suffix if they are
-	# the same for all fallback servers
+	type Inspircd_2000
+	linkaddr 4.2.2.2
 	linkport 8003
 	linktype plain
 	sendpass pass

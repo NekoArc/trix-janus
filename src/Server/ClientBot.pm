@@ -433,8 +433,15 @@ sub pm_not {
 		return ();
 	} elsif ($dst->isa('Channel')) {
 		my $out = $_[3];
-		$out =~ s/\x03[0-9]{1,2}(,[0-9]{1,2})?//g;
-		$out =~ s/[\x02\x1f\x16\x0f]//g;
+
+		my $ccode = $Janus::cclvl;
+		if ($ccode == 2) {
+			$out =~ s/\x03[0-9]{1,2}(,[0-9]{1,2})?//g;
+			$out =~ s/[\x02\x1f\x16\x0f]//g;
+		} elsif ($ccode == 1) {
+			$out =~ s/\x03[0-9]{1,2}(,[0-9]{1,2})?//g;
+		}
+
 		return +{
 			type => 'MSG',
 			src => $src,

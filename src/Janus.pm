@@ -71,6 +71,10 @@ Either true or false depending on the tagall setting.
 
 Level of oper status sharing from from other Janus linked networks.
 
+=item $Janus::cclvl
+
+Controls the IRC control codes sent between shared networks
+
 =item %Janus::modinfo
 
 Map of module name to module information hash.
