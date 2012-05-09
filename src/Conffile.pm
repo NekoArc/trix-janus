@@ -118,8 +118,7 @@ sub read_conf {
 		$laddy = '.'.$laddy;
 		if (defined($laddy)) {
 			$Janus::laddy = $laddy;
-		}
-		else {
+		} else {
 			Log::err("Bad value $laddy for set::laddy");
 			return;
 		}
@@ -128,8 +127,7 @@ sub read_conf {
 		my $tag = $newconf{set}{tagall} || 0;
 		if ($tag == 1 or $tag == 0) {
 			$Janus::tagall = $tag;
-		}
-		else {
+		} else {
 			Log::err("Bad value $tag for set::tagall");
 			return;
 		}
@@ -138,8 +136,7 @@ sub read_conf {
 		my $operlvl = $newconf{set}{operlvl} || 0;
 		if ($operlvl >= 0 && $operlvl < 3) {
 			$Janus::operlvl = $operlvl;
-		}
-		else {
+		} else {
 			Log::err("Bad value $operlvl for set::operlvl");
 			return;
 		}
@@ -148,8 +145,7 @@ sub read_conf {
 		my $cclvl = $newconf{set}{cclvl} || 1;
 		if ($cclvl >= 0 && $cclvl < 3) {
 			$Janus::cclvl = $cclvl;
-		}
-		else {
+		} else {
 			Log::err("Bad value $cclvl for set::cclvl");
 			return;
 		}

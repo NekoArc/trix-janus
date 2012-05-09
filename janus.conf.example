@@ -205,8 +205,7 @@ link i1 {
 	linkport 8003
 	linktype plain
 	sendpass pass
-	recvpass.1 password
-	recvpass.2 passwurd
+	recvpass pass
 	netname Insp Server
 	autoconnect 1
 }
