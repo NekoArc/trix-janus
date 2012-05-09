@@ -113,17 +113,17 @@ sub read_conf {
 		Log::err("Server name not set! You need set block with a 'name' entry");
 		return;
 	}
-	unless (defined($Janus::laddy)) {
-		my $laddy = $newconf{set}{laddy} || 'janus';
+	unless ($newconf{set}{laddy}) {
+		my $laddy = lc $newconf{set}{laddy} || 'janus';
 		$laddy = '.'.$laddy;
-		if (defined($laddy)) {
+		if ($laddy) {
 			$Janus::laddy = $laddy;
 		} else {
 			Log::err("Bad value $laddy for set::laddy");
 			return;
 		}
 	}
-	unless (defined($Janus::tagall)) {
+	unless ($newconf{set}{tagall}) {
 		my $tag = $newconf{set}{tagall} || 0;
 		if ($tag == 1 or $tag == 0) {
 			$Janus::tagall = $tag;
@@ -132,8 +132,8 @@ sub read_conf {
 			return;
 		}
 	}
-	unless (defined($Janus::operlvl)) {
-		my $operlvl = $newconf{set}{operlvl} || 0;
+	unless ($newconf{set}{operlvl}) {
+		my $operlvl = lc $newconf{set}{operlvl} || 0;
 		if ($operlvl >= 0 && $operlvl < 3) {
 			$Janus::operlvl = $operlvl;
 		} else {
@@ -141,8 +141,8 @@ sub read_conf {
 			return;
 		}
 	}
-	unless (defined($Janus::cclvl)) {
-		my $cclvl = $newconf{set}{cclvl};
+	unless ($newconf{set}{cclvl}) {
+		my $cclvl = lc $newconf{set}{cclvl} || 1;
 		if ($cclvl >= 0 && $cclvl < 3) {
 			$Janus::cclvl = $cclvl;
 		} else {
