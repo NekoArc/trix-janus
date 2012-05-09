@@ -142,7 +142,7 @@ sub read_conf {
 		}
 	}
 	unless (defined($Janus::cclvl)) {
-		my $cclvl = $newconf{set}{cclvl} || 1;
+		my $cclvl = $newconf{set}{cclvl};
 		if ($cclvl >= 0 && $cclvl < 3) {
 			$Janus::cclvl = $cclvl;
 		} else {
