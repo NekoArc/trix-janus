@@ -79,7 +79,7 @@ set {
 	# Note: If you don't know what the above means just leave the bottow two commented
 	# out to use the default setting.
 	#pidfile janus.pid
-	#runmode uproc-daemon
+	#runmode mplex-daemon
 
 	# Other parameters as defined by modules may be present here
 	# Example: Commands::Debug takes a date-based format for the dump files
