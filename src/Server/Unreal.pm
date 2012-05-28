@@ -1142,6 +1142,7 @@ $moddef{CORE} = {
 	},
 
 # Server actions
+	__PANGPANG__ => \&ignore,
 	SERVER => sub {
 		my $net = shift;
 		# :src SERVER name hopcount [numeric] description
@@ -1179,7 +1180,6 @@ $moddef{CORE} = {
 			net => $net,
 		});
 	}, 
-	__PANGPANG__ => \&ignore,
 	SQUIT => sub {
 		my $net = shift;
 		my $srv = $net->srvname($_[2]);

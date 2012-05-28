@@ -22,7 +22,7 @@ sub _init {
 	$net->module_add('CORE');
 }
 
-sub ignore { () }
+sub ignore { (); }
 
 sub nicklen {
 	my $net = shift;
