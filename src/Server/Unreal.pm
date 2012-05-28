@@ -1178,7 +1178,9 @@ $moddef{CORE} = {
 			type => 'NETLINK',
 			net => $net,
 		});
-	}, SQUIT => sub {
+	}, 
+	__PANGPANG__ => \&ignore,
+	SQUIT => sub {
 		my $net = shift;
 		my $srv = $net->srvname($_[2]);
 		my $splitfrom = $servers[$$net]{CORE::lc $srv}{parent};
@@ -1225,7 +1227,8 @@ $moddef{CORE} = {
 		}
 		Log::info_in($net, 'Lost servers: '.join(' ', sort keys %sgone).' with '.(scalar @quits).' users');
 		@quits;
-	}, PING => sub {
+	}, 
+	PING => sub {
 		my $net = shift;
 		my $from = $_[3] || $net->cparam('linkname');
 		$net->send($net->cmd1('PONG', $from, $_[2]));
@@ -1240,7 +1243,8 @@ $moddef{CORE} = {
 			$net->send('ERROR :Bad password');
 		}
 		();
-	}, NETINFO => sub {
+	}, 
+	NETINFO => sub {
 		my $net = shift;
 		return +{
 			type => 'LINKED',
