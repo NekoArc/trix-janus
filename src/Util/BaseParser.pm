@@ -3,7 +3,7 @@
 package Util::BaseParser;
 use LocalNetwork;
 use Persist 'LocalNetwork';
-#use strict;
+use strict;
 #use warnings;
 
 our @rawout;
