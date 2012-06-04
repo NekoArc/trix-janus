@@ -1432,7 +1432,7 @@ $moddef{CORE} = {
 		my $id = $gone->name();
 		my $msg = $act->{msg} || 'Excessive Core Radiation';
 		(
-			$net->cmd1(SMO => 'o', "(\002delink\002) Janus Network $id (".$gone->netname().") has delinked: $msg"),
+			#$net->cmd1(SMO => 'o', "(\002delink\002) Janus Network $id (".$gone->netname().") has delinked: $msg"),
 			$net->cmd1(SQUIT => $gone->jname(), $msg),
 		);
 	}, JNETSPLIT => sub {
