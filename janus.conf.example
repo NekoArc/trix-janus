@@ -65,7 +65,7 @@ set {
 	# Control Code Level - This controls the colour and IRC control codes between Janus
 	# linked Networks. Use this to strip unwanted colours, underlines or bold from shared
 	# user's text.
-	# Note: This defaults to 1 when not set
+	# Note: This defaults to 0 when not set
 	# 0 - Allows Colours, Bold and Underline
 	# 1 - Removes only Colours
 	# 2 - Removes all Colours, Bold and Underline
