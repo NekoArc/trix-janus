@@ -38,7 +38,7 @@ sub read_conf {
 				Log::err("Error in line $. of config file: expected network ID");
 				return;
 			};
-			/^([a-zA-Z][-0-9a-zA-Z_]{0,7})( |$)/ or do {
+			/^([a-zA-Z][-0-9a-zA-Z_]{0,10})( |$)/ or do {
 				Log::err("Invalid network ID '$1' in line $. of config file");
 				return;
 			};
