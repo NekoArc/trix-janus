@@ -124,7 +124,7 @@ sub read_conf {
 		}
 	}
 	unless ($Janus::tagall) {
-		my $tag = lc $newconf{set}{tagall} || 0;
+		my $tag = $newconf{set}{tagall} || 0;
 		if ($tag == 1 or $tag == 0) {
 			$Janus::tagall = $tag;
 		} else {
@@ -133,7 +133,7 @@ sub read_conf {
 		}
 	}
 	unless ($Janus::operlvl) {
-		my $operlvl = lc $newconf{set}{operlvl} || 0;
+		my $operlvl = $newconf{set}{operlvl} || 0;
 		if ($operlvl >= 0 && $operlvl < 3) {
 			$Janus::operlvl = $operlvl;
 		} else {
@@ -142,7 +142,7 @@ sub read_conf {
 		}
 	}
 	unless ($Janus::cclvl) {
-		my $cclvl = lc $newconf{set}{cclvl} || 0;
+		my $cclvl = $newconf{set}{cclvl} || 0;
 		if ($cclvl >= 0 && $cclvl < 3) {
 			$Janus::cclvl = $cclvl;
 		} else {
