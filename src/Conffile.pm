@@ -114,7 +114,7 @@ sub read_conf {
 		return;
 	}
 	unless ($Janus::laddy) {
-		my $laddy = lc $newconf{set}{laddy} || 'janus';
+		my $laddy = $newconf{set}{laddy} || 'janus';
 		$laddy = '.'.$laddy;
 		if ($laddy) {
 			$Janus::laddy = $laddy;
