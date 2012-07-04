@@ -102,7 +102,7 @@ sub read_conf {
 			Log::err("You must restart the server to change the name")
 				if $RemoteJanus::self->id() ne $newconf{set}{name};
 			$newconf{set}{name} = $RemoteJanus::self->id();
-		} elsif ($newconf{set}{name} !~ /^[a-zA-Z][-0-9a-zA-Z_]{0,7}$/) {
+		} elsif ($newconf{set}{name} !~ /^[a-zA-Z][-0-9a-zA-Z_]{0,10}$/) {
 			Log::err("Invalid server name $newconf{set}{name}");
 			return;
 		} elsif ($newconf{$newconf{set}{name}}) {
@@ -124,7 +124,7 @@ sub read_conf {
 		}
 	}
 	unless ($Janus::tagall) {
-		my $tag = $newconf{set}{tagall} || 0;
+		my $tag = lc $newconf{set}{tagall} || 0;
 		if ($tag == 1 or $tag == 0) {
 			$Janus::tagall = $tag;
 		} else {
