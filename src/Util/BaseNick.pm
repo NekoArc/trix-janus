@@ -47,7 +47,7 @@ sub request_nick {
 		$given = $reqnick;
 		$given_lc = $net->lc($given);
 	} else {
-		$reqnick =~ s/[^0-9a-zA-Z\[\]\\^\-_`{|}]/_/g;
+		$reqnick =~ s/[^0-9a-zA-Z\[\]\\^\-_`{|}\x{0400}-\x{052F}]/_/g;
 		$reqnick = '_'.$reqnick unless $reqnick =~ /^[A-Za-z\[\]\\^\-_`{|}]/;
 		my $maxlen = $net->nicklen();
 		$given = substr $reqnick, 0, $maxlen;
