@@ -115,9 +115,8 @@ sub read_conf {
 	}
 	unless ($Janus::laddy) {
 		my $laddy = $newconf{set}{laddy} || 'janus';
-		$laddy = '.'.$laddy;
 		if ($laddy) {
-			$Janus::laddy = $laddy;
+			$Janus::laddy = '.'.$laddy;
 		} else {
 			Log::err("Bad value $laddy for set::laddy");
 			return;
