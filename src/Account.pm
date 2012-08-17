@@ -74,7 +74,8 @@ sub chan_access_chk {
 	if (acl_check($nick, 'link')) {
 		return 1;
 	}
-	my $chanacl = Setting::get(link_requires => $net);
+#	my $chanacl = Setting::get(link_requires => $net);
+	my $chanacl = $Janus::linkreq;
 	$chanacl = 'op' if $acl eq 'info';
 	if ('n' eq Modes::mtype($chanacl)) {
 		return 1 if $chan->has_nmode($chanacl, $nick);

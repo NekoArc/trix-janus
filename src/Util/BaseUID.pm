@@ -114,7 +114,7 @@ sub register_nick {
 
 sub _request_nick {
 	my($net, $nick, $reqnick, $tagged) = @_;
-	$reqnick =~ s/[^0-9a-zA-Z\[\]\\^\-_`{|}\x{0400}-\x{052F}]/_/g;
+	# $reqnick =~ s/[^0-9a-zA-Z\[\]\\^\-_`{|}\x{0400}-\x{052F}]/_/g;
 	my $maxlen = $net->nicklen();
 	my $given = substr $reqnick, 0, $maxlen;
 	my $given_lc = $net->lc($given);
@@ -134,7 +134,9 @@ sub _request_nick {
 	$tagged = 0 if $tagre && $Janus::tagall && $$nick != 1 && $given =~ /$tagre/;
 
 	if ($tagged) {
-		my $tagsep = Setting::get(tagsep => $net);
+		my $tagsep = $Janus::septag;
+		my $tagtest = Setting::get(tagsep => $net);
+		$tagsep = $tagtest if $tagtest eq '_';
 		my $tag = $tagsep . $nick->homenet()->name();
 		my $i = 0;
 		$given = substr($reqnick, 0, $maxlen - length $tag) . $tag;

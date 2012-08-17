@@ -466,12 +466,13 @@ sub umode_from_irc {
 my $unreal64_table = join '', 0 .. 9, 'A'..'Z', 'a'..'z', '{}';
 
 # Why * for owner and ~ for admin? Oo
+# The ol' reverse check flip which should gives it time to see the owners ;)
 my %sjpfx2txt = (
-	'*' => 'owner',
-	'~' => 'admin',
-	'@' => 'op',
-	'%' => 'halfop',
 	'+' => 'voice',
+	'%' => 'halfop',
+	'@' => 'op',
+	'~' => 'admin',
+	'*' => 'owner',
 );
 
 sub sjbint {

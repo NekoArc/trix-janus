@@ -47,8 +47,8 @@ sub request_nick {
 		$given = $reqnick;
 		$given_lc = $net->lc($given);
 	} else {
-		$reqnick =~ s/[^0-9a-zA-Z\[\]\\^\-_`{|}\x{0400}-\x{052F}]/_/g;
-		$reqnick = '_'.$reqnick unless $reqnick =~ /^[A-Za-z\[\]\\^\-_`{|}\x{0400}-\x{052F}]/;
+		#$reqnick =~ s/[^0-9a-zA-Z\[\]\\^\-_`{|}\x{0400}-\x{052F}]/_/g;
+		#$reqnick = '_'.$reqnick unless $reqnick =~ /^[A-Za-z\[\]\\^\-_`{|}\x{0400}-\x{052F}]/;
 		my $maxlen = $net->nicklen();
 		$given = substr $reqnick, 0, $maxlen;
 		$given_lc = $net->lc($given);
@@ -68,7 +68,7 @@ sub request_nick {
 		$tagged = 0 if $tagre && $Janus::tagall && $$nick != 1 && $given =~ /^$tagre$/i;
 
 		if ($tagged) {
-			my $tagsep = Setting::get(tagsep => $net);
+			my $tagsep = $Janus::septag;
 			my $tag = $tagsep . $nick->homenet()->name();
 			my $i = 0;
 			$given = substr($reqnick, 0, $maxlen - length $tag) . $tag;

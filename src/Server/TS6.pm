@@ -63,7 +63,7 @@ sub str {
 sub intro {
 	my($net,@param) = @_;
 	$net->SUPER::intro(@param);
-	my $sep = Setting::get(tagsep => $net);
+	my $sep = $Janus::septag;
 	Setting::set(tagsep => $net, '_') if $sep eq '/';
 	my $ircd = $net->cparam('ircd');
 	if ($ircd) {
