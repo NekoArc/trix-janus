@@ -167,7 +167,7 @@ sub read_conf {
 		} elsif ($lreq eq 'oper') {
 			$Janus::linkreq = 'oper';
 		} else {
-			Log::err("Bad value $mode for set::linkreq");
+			Log::err("Bad value $lreq for set::linkreq");
 			return;
 		}
 	}
@@ -178,7 +178,7 @@ sub read_conf {
 		} elsif ($lmode eq 'bridge') {
 			Janus::load('Bridge');
 		} else {
-			Log::err("Bad value $mode for set::lmode");
+			Log::err("Bad value $lmode for set::lmode");
 			return;
 		}
 	}
