@@ -113,30 +113,6 @@ sub read_conf {
 		Log::err("Server name not set! You need set block with a 'name' entry");
 		return;
 	}
-	unless ($Janus::lmode) {
-		my $mode = lc $newconf{set}{lmode} || 'link';
-		if ($mode eq 'link') {
-			Janus::load('Link');
-		} elsif ($mode eq 'bridge') {
-			Janus::load('Bridge');
-		} else {
-			Log::err("Bad value $mode for set::lmode");
-			return;
-		}
-	}
-	unless ($Janus::linkreq) {
-		my $lreq = lc $newconf{set}{linkreq} || 'owner';
-		if ($lreq eq 'owner') {
-			$Janus::linkreq = 'owner';
-		} elsif ($lreq eq 'op') {
-			$Janus::linkreq = 'op';
-		} elsif ($lreq eq 'oper') {
-			$Janus::linkreq = 'oper';
-		} else {
-			Log::err("Bad value $mode for set::linkreq");
-			return;
-		}
-	}
 	unless ($Janus::laddy) {
 		my $laddy = $newconf{set}{laddy} || 'janus';
 		if ($laddy) {
@@ -179,6 +155,30 @@ sub read_conf {
 			$Janus::cclvl = $cclvl;
 		} else {
 			Log::err("Bad value $cclvl for set::cclvl");
+			return;
+		}
+	}
+	unless ($Janus::linkreq) {
+		my $lreq = lc $newconf{set}{linkreq} || 'owner';
+		if ($lreq eq 'owner') {
+			$Janus::linkreq = 'owner';
+		} elsif ($lreq eq 'op') {
+			$Janus::linkreq = 'op';
+		} elsif ($lreq eq 'oper') {
+			$Janus::linkreq = 'oper';
+		} else {
+			Log::err("Bad value $mode for set::linkreq");
+			return;
+		}
+	}
+	unless ($Janus::lmode) {
+		my $mode = lc $newconf{set}{lmode} || 'link';
+		if ($mode eq 'link') {
+			Janus::load('Link');
+		} elsif ($mode eq 'bridge') {
+			Janus::load('Bridge');
+		} else {
+			Log::err("Bad value $mode for set::lmode");
 			return;
 		}
 	}
