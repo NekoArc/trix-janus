@@ -172,10 +172,10 @@ sub read_conf {
 		}
 	}
 	unless ($Janus::lmode) {
-		my $mode = lc $newconf{set}{lmode} || 'link';
-		if ($mode eq 'link') {
+		my $lmode = lc $newconf{set}{lmode} || 'link';
+		if ($lmode eq 'link') {
 			Janus::load('Link');
-		} elsif ($mode eq 'bridge') {
+		} elsif ($lmode eq 'bridge') {
 			Janus::load('Bridge');
 		} else {
 			Log::err("Bad value $mode for set::lmode");
