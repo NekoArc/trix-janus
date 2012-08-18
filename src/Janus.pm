@@ -59,9 +59,22 @@ Map of channel name to channel object. This is only used in bridge mode.
 
 Either "link" or "bridge" depending on the link mode.
 
+=item $Janus::linkreq
+
+Either "owner", "op" or "oper" and controls minimum access requirement to
+create, destroy and link channels.
+
+=item $Janus::janus_type
+
+Either "notice" or "privmsg" and controls how the interface responds to users.
+
 =item $Janus::laddy
 
 Sets the link address used in /map
+
+=item $Janus::septag
+
+Controls the network tag seperator used with nickname collision resolution.
 
 =item $Janus::tagall
 
@@ -73,7 +86,7 @@ Level of oper status sharing from from other Janus linked networks.
 
 =item $Janus::cclvl
 
-Controls the IRC control codes sent between shared networks
+Controls the IRC control codes sent between shared networks.
 
 =item %Janus::modinfo
 
