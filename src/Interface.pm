@@ -385,12 +385,13 @@ sub jmsg {
 		my $type =
 			$dst->isa('Nick') ? 'NOTICE' :
 			$dst->isa('Channel') ? 'PRIVMSG' : '';
+		return unless $type;
 	} else {
 		my $type =
 			$dst->isa('Nick') ? 'PRIVMSG' :
 			$dst->isa('Channel') ? 'PRIVMSG' : '';
+		return unless $type;
 	}
-	return unless $type;
 	local $_;
 	my @o;
 	for (map { split /[\r\n]+/ } @_) {
