@@ -241,16 +241,14 @@ link i1 {
 
 # Other server protocols link the same way.
 # See the protocol module names in src/Server/
-link chy {
+link ts6 {
 	type TS6
-# TS6 takes an additional parameter for the ircd type
-	ircd charybdis
 	linkaddr 4.2.2.2
 	linkport 1234
 	linktype plain
 	sendpass abc
 	recvpass def
-	netname Charybdis Server
+	netname TS6 Server
 }
 
 # Inter-janus link block
