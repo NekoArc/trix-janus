@@ -1,6 +1,6 @@
 # Copyright (C) 2007-2009 Daniel De Graaf
 # Released under the GNU Affero General Public License v3
-package Server::SporksIRCd;
+package Server::CharybdisIRCd;
 use Nick;
 use Modes;
 use Util::BaseUID;
