@@ -1,6 +1,6 @@
 # Copyright (C) 2007-2009 Daniel De Graaf
 # Released under the GNU Affero General Public License v3
-package Server::TS6;
+package Server::SporksIRCd;
 use Nick;
 use Modes;
 use Util::BaseUID;
@@ -65,10 +65,7 @@ sub intro {
 	$net->SUPER::intro(@param);
 	my $sep = $Janus::septag;
 	Setting::set(tagsep => $net, '_') if $sep eq '/';
-	my $ircd = $net->cparam('ircd');
-	if ($ircd) {
-		# Does Nothing - Left here for backward compatibility
-	}
+	$net->module_add('CHARYBDIS', 1);
 	if ($net->auth_should_send) {
 		my $name = $net->cparam('linkname') || $RemoteJanus::self->jname;
 		$net->send(
@@ -298,6 +295,77 @@ $moddef{CAPAB_SAVE} = {
 	}
 };
 
+$moddef{CHARYBDIS} = {
+	cmode => {
+		q => 'l_quiet_ban',
+		f => 's_forward',
+		j => 's_joinlimit',
+#		F => 'r_', # can be +f target
+#		L => 'r_', # large ban lists
+		P => 'r_permanent',
+#		Q => 'r_', # ignore forwards
+		c => 'r_colorblock',
+		g => 'r_allinvite',
+		z => 'r_survey',
+	},
+	umode => {
+		Z => 'ssl',
+	},
+	'send' => {
+		NICKINFO => sub {
+			my($net,$act) = @_;
+			my $nick = $act->{dst};
+			if ($act->{item} eq 'vhost') {
+				my $vhost = $act->{value};
+				$vhost =~ s/[^-.0-9:A-Za-z]/./g;
+				return $net->ncmd(ENCAP => '*', CHGHOST => $nick, $vhost);
+			} elsif ($act->{item} eq 'ident' || $act->{item} eq 'name') {
+				return $net->do_qjm($nick, 'Changing '.$act->{item});
+			}
+			return ();
+		},
+	},
+	parse => {
+		CHGHOST => sub {
+			my $net = shift;
+			my $src = $net->item($_[0]);
+			my $dst = $net->nick($_[2]) or return ();
+			if ($dst->homenet == $net) {
+				return +{
+					type => 'NICKINFO',
+					src => $src,
+					dst => $dst,
+					item => 'vhost',
+					value => $_[3],
+				};
+			} else {
+				$net->send($net->cmd2($Interface::janus, CHGHOST => $_[2], $dst->info('vhost')));
+				();
+			}
+		},
+		PRIVS => \&ignore,
+		REALHOST => sub {
+			my $net = shift;
+			my $nick = $net->mynick($_[0]) or return ();
+			return +{
+				type => 'NICKINFO',
+				dst => $nick,
+				item => 'host',
+				value => $_[2],
+			},
+		},
+		REHASH => \&ignore,
+		SASL => \&ignore,
+		SNOTE => \&ignore,
+		SVSLOGIN => \&ignore,
+
+# TODO:
+		DLINE => \&ignore,
+		NICKDELAY => \&ignore, # act like SVSNICK?
+		UNDLINE => \&ignore,
+	},
+};
+
 $moddef{CORE} = {
   cmode => {
 		b => 'l_ban',
@@ -313,7 +381,6 @@ $moddef{CORE} = {
 		v => 'n_voice',
   },
   umode => {
-		D => 'deaf_chan',
 		S => 'service',
 		i => 'invisible',
 		w => 'wallops',

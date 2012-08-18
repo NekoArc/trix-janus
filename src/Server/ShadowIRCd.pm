@@ -103,7 +103,7 @@ sub inner_send {
 }
 
 my @letters = ('A' .. 'Z', 0 .. 9);
-my %txt2pfx = (qw/op @ halfop % voice +/);
+my %txt2pfx = (qw/admin & op @ halfop % voice +/);
 
 sub net2uid {
 	return '0AJ' if @_ == 2 && $_[0] == $_[1];
@@ -147,7 +147,7 @@ sub do_qjm {
 		next unless $chan->is_on($net);
 		my $mode = join '', map {
 			$chan->has_nmode($_, $nick) && Modes::implements($net, $_) ? $txt2pfx{$_} : ''
-		} qw/voice halfop op/;
+		} qw/voice halfop op admin/;
 		my @cmodes = $net->cmode_to_irc_1($chan, Modes::dump($chan), 60);
 
 		push @out, $net->ncmd(SJOIN => $chan->ts, $chan, @cmodes, $mode.$nick->str($net));
