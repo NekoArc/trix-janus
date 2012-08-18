@@ -116,9 +116,9 @@ sub read_conf {
 	unless ($Janus::janus_type) {
 		my $jtype = lc $newconf{set}{janus_type} || 'privmsg';
 		if ($jtype eq 'privmsg') {
-			$Janus::janus_type = 'privmsg';
+			$Janus::janus_type = 'PRIVMSG';
 		} elsif ($jtype eq 'notice') {
-			$Janus::janus_type = 'notice';
+			$Janus::janus_type = 'NOTICE';
 		} else {
 			Log::err("Bad value $jtype for set::janus_type");
 			return;
