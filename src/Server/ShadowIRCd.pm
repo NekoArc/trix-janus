@@ -65,10 +65,7 @@ sub intro {
 	$net->SUPER::intro(@param);
 	my $sep = $Janus::septag;
 	Setting::set(tagsep => $net, '_') if $sep eq '/';
-	my $ircd = $net->cparam('ircd');
-	if ($ircd) {
-		$net->module_add(uc $ircd, 1);
-	}
+	$net->module_add('CHARYBDIS', 1);
 	if ($net->auth_should_send) {
 		my $name = $net->cparam('linkname') || $RemoteJanus::self->jname;
 		$net->send(
