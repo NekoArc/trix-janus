@@ -29,6 +29,15 @@ set {
 	#janus_name Janus Control Interface
 	#janus_rhost services.janus
 	#janus_host services
+	
+	# Interface Type - This changes how the Janus interface responds to
+	# commands sent to it. It can either respond by private message used with
+	# IRC Bots or the traditional notices that Services are supposed to use.
+	# Possible options:
+	#  notice - Sends Interface responses to the user as notices.
+	#  privmsg - Sends Interface responses to the user as private messages.
+	# Note: This defaults to privmsg
+	#janus_type privmsg
 
 	# Administrator password - if set, this enables an "admin" account with 
 	# full access to all commands. Once you have created normal accounts,

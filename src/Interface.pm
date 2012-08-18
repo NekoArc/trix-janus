@@ -381,16 +381,15 @@ to the given destination
 sub jmsg {
 	my $dst = shift;
 	return unless $dst && ref $dst;
-#	if ($Conffile::netconf{set}{janus_umsg}) {
-#		if ($Conffile::netconf{set}{janus_umsg} == 'PRIVMSG' || $Conffile::netconf{set}{janus_umsg} == 'privmsg') {
-#			my $usermsg = 'PRIVMSG';
-#		}
-#	} else {
-#		my $usermsg = 'NOTICE';
-#	}
-	my $type =
-		$dst->isa('Nick') ? 'PRIVMSG' :
-		$dst->isa('Channel') ? 'PRIVMSG' : '';
+	if ($Janus::janus_type eq 'notice') {
+		my $type =
+			$dst->isa('Nick') ? 'NOTICE' :
+			$dst->isa('Channel') ? 'PRIVMSG' : '';
+	} else {
+		my $type =
+			$dst->isa('Nick') ? 'PRIVMSG' :
+			$dst->isa('Channel') ? 'PRIVMSG' : '';
+	}
 	return unless $type;
 	local $_;
 	my @o;

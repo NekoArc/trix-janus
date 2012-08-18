@@ -113,8 +113,19 @@ sub read_conf {
 		Log::err("Server name not set! You need set block with a 'name' entry");
 		return;
 	}
+	unless ($Janus::janus_type) {
+		my $jtype = lc $newconf{set}{janus_type} || 'privmsg';
+		if ($jtype eq 'privmsg') {
+			$Janus::janus_type = 'privmsg';
+		} elsif ($lmode eq 'notice') {
+			$Janus::janus_type = 'notice';
+		} else {
+			Log::err("Bad value $jtype for set::janus_type");
+			return;
+		}
+	}
 	unless ($Janus::laddy) {
-		my $laddy = $newconf{set}{laddy} || 'janus';
+		my $laddy = lc $newconf{set}{laddy} || 'janus';
 		if ($laddy) {
 			$Janus::laddy = '.'.$laddy;
 		} else {
