@@ -1,6 +1,6 @@
 # Copyright (C) 2007-2009 Daniel De Graaf
 # Released under the GNU Affero General Public License v3
-package Server::SporksIRCd;
+package Server::ShadowIRCd;
 use Nick;
 use Modes;
 use Util::BaseUID;
@@ -382,7 +382,6 @@ $moddef{CORE} = {
 		r => 'r_reginvite',
 		t => 'r_topic',
 		v => 'n_voice',
-		u => 'n_owner',
 		a => 'n_admin',
 		h => 'n_halfop',
   },
@@ -858,8 +857,7 @@ $moddef{CORE} = {
 			my $nmode = $1;
 			my $nick = $net->mynick($2) or next;
 			my %mh = (
-				$nmode =~ /~/ ? (owner => 1) : (),
-				$nmode =~ /!/ ? (admin => 1) : (),
+				$nmode =~ /&/ ? (admin => 1) : (),
 				$nmode =~ /@/ ? (op => 1) : (),
 				$nmode =~ /%/ ? (halfop => 1) : (),
 				$nmode =~ /\+/ ? (voice => 1) : (),
