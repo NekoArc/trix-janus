@@ -381,17 +381,11 @@ to the given destination
 sub jmsg {
 	my $dst = shift;
 	return unless $dst && ref $dst;
-	if ($Janus::janus_type eq 'notice') {
-		my $type =
-			$dst->isa('Nick') ? 'NOTICE' :
-			$dst->isa('Channel') ? 'PRIVMSG' : '';
-		return unless $type;
-	} else {
-		my $type =
-			$dst->isa('Nick') ? 'PRIVMSG' :
-			$dst->isa('Channel') ? 'PRIVMSG' : '';
-		return unless $type;
-	}
+	my $ntype = $Janus::janus_type;
+	my $type =
+		$dst->isa('Nick') ? $ntype :
+		$dst->isa('Channel') ? 'PRIVMSG' : '';
+	return unless $type;
 	local $_;
 	my @o;
 	for (map { split /[\r\n]+/ } @_) {
