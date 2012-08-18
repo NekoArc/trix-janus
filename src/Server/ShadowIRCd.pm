@@ -65,7 +65,7 @@ sub intro {
 	$net->SUPER::intro(@param);
 	my $sep = $Janus::septag;
 	Setting::set(tagsep => $net, '_') if $sep eq '/';
-	$net->module_add('CHARYBDIS', 1);
+	$net->module_add('SHADOWIRCD', 1);
 	if ($net->auth_should_send) {
 		my $name = $net->cparam('linkname') || $RemoteJanus::self->jname;
 		$net->send(
@@ -295,7 +295,7 @@ $moddef{CAPAB_SAVE} = {
 	}
 };
 
-$moddef{CHARYBDIS} = {
+$moddef{SHADOWIRCD} = {
 	cmode => {
 		q => 'l_quiet_ban',
 		f => 's_forward',
@@ -383,7 +383,6 @@ $moddef{CORE} = {
 		h => 'n_halfop',
   },
   umode => {
-		D => 'deaf_chan',
 		S => 'service',
 		i => 'invisible',
 		w => 'wallops',

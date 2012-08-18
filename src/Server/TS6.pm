@@ -369,6 +369,153 @@ $moddef{CHARYBDIS} = {
 	},
 };
 
+$moddef{SPORKSIRCD} = {
+	cmode => {
+		q => 'l_quiet_ban',
+		f => 's_forward',
+		j => 's_joinlimit',
+#		F => 'r_', # can be +f target
+#		L => 'r_', # large ban lists
+		P => 'r_permanent',
+#		Q => 'r_', # ignore forwards
+		c => 'r_colorblock',
+		g => 'r_allinvite',
+		z => 'r_survey',
+		u => 'n_owner',
+		a => 'n_admin',
+		h => 'n_halfop',
+	},
+	umode => {
+		Z => 'ssl',
+	},
+	'send' => {
+		NICKINFO => sub {
+			my($net,$act) = @_;
+			my $nick = $act->{dst};
+			if ($act->{item} eq 'vhost') {
+				my $vhost = $act->{value};
+				$vhost =~ s/[^-.0-9:A-Za-z]/./g;
+				return $net->ncmd(ENCAP => '*', CHGHOST => $nick, $vhost);
+			} elsif ($act->{item} eq 'ident' || $act->{item} eq 'name') {
+				return $net->do_qjm($nick, 'Changing '.$act->{item});
+			}
+			return ();
+		},
+	},
+	parse => {
+		CHGHOST => sub {
+			my $net = shift;
+			my $src = $net->item($_[0]);
+			my $dst = $net->nick($_[2]) or return ();
+			if ($dst->homenet == $net) {
+				return +{
+					type => 'NICKINFO',
+					src => $src,
+					dst => $dst,
+					item => 'vhost',
+					value => $_[3],
+				};
+			} else {
+				$net->send($net->cmd2($Interface::janus, CHGHOST => $_[2], $dst->info('vhost')));
+				();
+			}
+		},
+		PRIVS => \&ignore,
+		REALHOST => sub {
+			my $net = shift;
+			my $nick = $net->mynick($_[0]) or return ();
+			return +{
+				type => 'NICKINFO',
+				dst => $nick,
+				item => 'host',
+				value => $_[2],
+			},
+		},
+		REHASH => \&ignore,
+		SASL => \&ignore,
+		SNOTE => \&ignore,
+		SVSLOGIN => \&ignore,
+
+# TODO:
+		DLINE => \&ignore,
+		NICKDELAY => \&ignore, # act like SVSNICK?
+		UNDLINE => \&ignore,
+	},
+};
+
+$moddef{SHADOWIRCD} = {
+	cmode => {
+		q => 'l_quiet_ban',
+		f => 's_forward',
+		j => 's_joinlimit',
+#		F => 'r_', # can be +f target
+#		L => 'r_', # large ban lists
+		P => 'r_permanent',
+#		Q => 'r_', # ignore forwards
+		c => 'r_colorblock',
+		g => 'r_allinvite',
+		z => 'r_survey',
+		a => 'n_admin',
+		h => 'n_halfop',
+	},
+	umode => {
+		Z => 'ssl',
+	},
+	'send' => {
+		NICKINFO => sub {
+			my($net,$act) = @_;
+			my $nick = $act->{dst};
+			if ($act->{item} eq 'vhost') {
+				my $vhost = $act->{value};
+				$vhost =~ s/[^-.0-9:A-Za-z]/./g;
+				return $net->ncmd(ENCAP => '*', CHGHOST => $nick, $vhost);
+			} elsif ($act->{item} eq 'ident' || $act->{item} eq 'name') {
+				return $net->do_qjm($nick, 'Changing '.$act->{item});
+			}
+			return ();
+		},
+	},
+	parse => {
+		CHGHOST => sub {
+			my $net = shift;
+			my $src = $net->item($_[0]);
+			my $dst = $net->nick($_[2]) or return ();
+			if ($dst->homenet == $net) {
+				return +{
+					type => 'NICKINFO',
+					src => $src,
+					dst => $dst,
+					item => 'vhost',
+					value => $_[3],
+				};
+			} else {
+				$net->send($net->cmd2($Interface::janus, CHGHOST => $_[2], $dst->info('vhost')));
+				();
+			}
+		},
+		PRIVS => \&ignore,
+		REALHOST => sub {
+			my $net = shift;
+			my $nick = $net->mynick($_[0]) or return ();
+			return +{
+				type => 'NICKINFO',
+				dst => $nick,
+				item => 'host',
+				value => $_[2],
+			},
+		},
+		REHASH => \&ignore,
+		SASL => \&ignore,
+		SNOTE => \&ignore,
+		SVSLOGIN => \&ignore,
+
+# TODO:
+		DLINE => \&ignore,
+		NICKDELAY => \&ignore, # act like SVSNICK?
+		UNDLINE => \&ignore,
+	},
+};
+
 $moddef{CORE} = {
   cmode => {
 		b => 'l_ban',
@@ -855,6 +1002,9 @@ $moddef{CORE} = {
 			my $nmode = $1;
 			my $nick = $net->mynick($2) or next;
 			my %mh = (
+				$nmode =~ /~/ ? (owner => 1) : (),
+				$nmode =~ /!/ ? (admin => 1) : (),
+				$nmode =~ /&/ ? (admin => 1) : (),
 				$nmode =~ /@/ ? (op => 1) : (),
 				$nmode =~ /%/ ? (halfop => 1) : (),
 				$nmode =~ /\+/ ? (voice => 1) : (),
