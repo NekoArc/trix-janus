@@ -231,8 +231,8 @@ sub lc {
 	$o;
 }
 
-my %cm2txt = (qw/q owner a admin o op h halfop v voice/);
-my %txt2cm = (qw/owner q admin a op o halfop h voice v/);
+my %cm2txt = (qw/v voice h halfop o op a admin q owner/);
+my %txt2cm = (qw/voice v halfop h op o admin a owner q/);
 
 our %moddef = ();
 Janus::static('moddef');

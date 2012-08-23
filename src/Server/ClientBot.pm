@@ -500,12 +500,11 @@ Janus::static('moddef');
 # Well, it does now...
 $moddef{CORE} = {
 	cmode => {qw/
-		q n_owner
-		a n_admin
-		o n_op
-		h n_halfop
 		v n_voice
-
+		h n_halfop
+		o n_op
+		a n_admin
+		q n_owner
 		b l_ban
 		e l_except
 		I l_invite
@@ -1058,9 +1057,9 @@ $moddef{CORE} = {
 		$gecos =~ s/^\d+\s//; # remove server hop count
 		my @out = $net->cli_hostintro($_[7], $_[4], $_[5], $gecos);
 		my %mode;
-		$mode{op} = 1 if $_[8] =~ /[~&\@]/;
-		$mode{halfop} = 1 if $_[8] =~ /\%/;
 		$mode{voice} = 1 if $_[8] =~ /\+/;
+		$mode{halfop} = 1 if $_[8] =~ /\%/;
+		$mode{op} = 1 if $_[8] =~ /[~&\@]/;
 		push @out, +{
 			type => 'JOIN',
 			src => $net->mynick($_[7]),

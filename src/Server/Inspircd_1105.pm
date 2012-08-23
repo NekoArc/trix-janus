@@ -127,7 +127,7 @@ sub process_capabs {
 	local $_ = $capabs[$$net]{PREFIX};
 
 	my(%p2t,%t2p);
-	my %cm2t = ( qw/q owner a admin o op h halfop v voice/ );
+	my %cm2t = ( qw/v voice h halfop o op a admin q owner/ );
 	while (s/\((.)(.*)\)(.)/($2)/) {
 		my $txt = $cm2t{$1};
 		$t2p{$txt} = $3;

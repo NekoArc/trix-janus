@@ -103,7 +103,7 @@ sub inner_send {
 }
 
 my @letters = ('A' .. 'Z', 0 .. 9);
-my %txt2pfx = (qw/admin & op @ halfop % voice +/);
+my %txt2pfx = (qw/voice + halfop % op @ admin &/);
 
 sub net2uid {
 	return '0AJ' if @_ == 2 && $_[0] == $_[1];
@@ -853,10 +853,10 @@ $moddef{CORE} = {
 			my $nmode = $1;
 			my $nick = $net->mynick($2) or next;
 			my %mh = (
-				$nmode =~ /&/ ? (admin => 1) : (),
-				$nmode =~ /@/ ? (op => 1) : (),
-				$nmode =~ /%/ ? (halfop => 1) : (),
 				$nmode =~ /\+/ ? (voice => 1) : (),
+				$nmode =~ /%/ ? (halfop => 1) : (),
+				$nmode =~ /@/ ? (op => 1) : (),
+				$nmode =~ /&/ ? (admin => 1) : (),
 			);
 			push @acts, +{
 				type => 'JOIN',
