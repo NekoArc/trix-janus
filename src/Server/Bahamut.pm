@@ -47,7 +47,7 @@ sub intro {
 		my $name = $net->cparam('linkname');
 		my $num = $net->numeric_for($net);
 		$net->send(
-			'PASS '.$net->cparam('sendpass').' :TS',
+			'PASS '.$net->cparam('sendpass'),
 			'CAPAB :BURST NICKIP TSMODE SSJOIN NOQUIT UNCONNECT',
 			'SERVER '.$name.'1 :Janus Network Link',
 			'SVINFO 6 6 0 '.$Janus::time,
@@ -238,7 +238,7 @@ sub nc_msg {
 	if ($_[2] =~ /^\$/) {
 		# server broadcast message. No action; these are confined to source net
 		return ();
-	} elsif ($_[2] =~ /([@%+]?)(#\S*)/) {
+	} elsif ($_[2] =~ /([@+]?)(#\S*)/) {
 		# channel message, possibly to a mode prefix
 		return {
 			type => 'MSG',
@@ -354,7 +354,6 @@ my $unreal64_table = join '', 0 .. 9, 'A'..'Z', 'a'..'z', '{}';
 # The ol' reverse check flip which should gives it time to see the owners ;)
 my %sjpfx2txt = (
 	'+' => 'voice',
-	'%' => 'halfop',
 	'@' => 'op',
 );
 
@@ -435,7 +434,6 @@ $moddef{CORE} = {
 #	},
 	cmode => { qw/
 		v n_voice
-		h n_halfop
 		o n_op
 
 		i r_invite
@@ -1002,7 +1000,7 @@ $moddef{CORE} = {
 			my $server = $net->cparam('linkname');
 			my $pass = $net->cparam('sendpass');
 			my $num = $net->numeric_for($net);
-			$net->rawsend("PASS :$pass :TS\r\n".
+			$net->rawsend("PASS $pass\r\n".
 				'CAPAB :BURST NICKIP TSMODE SSJOIN NOQUIT UNCONNECT'.
 				"\r\nSERVER $server 1 :Janus Network Link\r\n".
 				"SVINFO 5 3 0 $Janus::time\r\n");
