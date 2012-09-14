@@ -47,7 +47,7 @@ sub intro {
 		my $name = $net->cparam('linkname');
 		my $num = $net->numeric_for($net);
 		$net->send(
-			'PASS '.$net->cparam('sendpass'),
+			'PASS '.$net->cparam('sendpass').' :TS',
 			'CAPAB :BURST NICKIP TSMODE SSJOIN NOQUIT UNCONNECT',
 			'SERVER '.$name.'1 :Janus Network Link',
 			'SVINFO 6 6 0 '.$Janus::time,
@@ -1000,7 +1000,7 @@ $moddef{CORE} = {
 			my $server = $net->cparam('linkname');
 			my $pass = $net->cparam('sendpass');
 			my $num = $net->numeric_for($net);
-			$net->rawsend("PASS $pass\r\n".
+			$net->rawsend("PASS $pass\r\n :TS".
 				'CAPAB :BURST NICKIP TSMODE SSJOIN NOQUIT UNCONNECT'.
 				"\r\nSERVER $server 1 :Janus Network Link\r\n".
 				"SVINFO 5 3 0 $Janus::time\r\n");
