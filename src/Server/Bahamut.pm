@@ -443,19 +443,6 @@ $moddef{CORE} = {
 		n r_mustjoin
 		ps t_chanhide
 		t r_topic
-		u r_auditorium
-		z r_sslonly
-		C r_ctcpblock
-		G r_badword
-		K r_noknock
-		L v_forward
-		M r_regmoderated
-		N r_norenick
-		O r_oper
-		Q r_nokick
-		R r_reginvite
-		Sc t_colorblock
-		V r_noinvite
 	/, },
 	cmode_in => {
 		'b' => sub {
@@ -499,41 +486,12 @@ $moddef{CORE} = {
 			push @$ao, $ai;
 			push @$do, $di;
 		},
-		'N' => sub {
-			my($net, $di, $ci, $ai, $ti, $mo, $ao, $do) = @_;
-			return if $ti eq 'inv';
-			push @$mo, 'renick_'.$ti;
-			push @$ao, $ai;
-			push @$do, $di;
-		},
 	}, cmode_out => {
 		ban => sub {
 			('b', $_[3]);
 		},
 		except => sub {
 			('e', $_[3]);
-		},
-		gecos_ban => sub {
-			('b', '~r:'.$_[3]);
-		},
-		gecos_ex => sub {
-			('e', '~r:'.$_[3]);
-		},
-		gecos_inv => sub {
-			return () unless $_[0]->protoctl >= 2309;
-			('I', '~r:'.$_[3]);
-		},
-		quiet_ban => sub {
-			('b', '~q:'.$_[3]);
-		},
-		quiet_ex => sub {
-			('e', '~q:'.$_[3]);
-		},
-		renick_ban => sub {
-			('b', '~n:'.$_[3]);
-		},
-		renick_ex => sub {
-			('e', '~n:'.$_[3]);
 		},
 	},
   parse => {

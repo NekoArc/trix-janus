@@ -525,9 +525,9 @@ $moddef{CORE} = {
 			$net->add_halfout([ 10, "JOIN $chan", 'JOIN', $chan ]);
 			();
 		} else {
-			return () unless $dst->get_mode('cb_showjoin');
-			my $id = $src->str($net).'!'.$src->info('ident').'@'.$src->info('vhost');
-			$net->cmd1(NOTICE => $dst, "Join: $id");
+			#return () unless $dst->get_mode('cb_showjoin');
+			my $id = $src->str($net).' ('.$src->info('ident').'@'.$src->info('vhost').')';
+			$net->cmd1(PRIVMSG => $dst, "Join: $id");
 		}
 	},
 	DELINK => sub {
@@ -564,8 +564,8 @@ $moddef{CORE} = {
 			my $chan = $dst->str($net);
 			"PART $chan :$act->{msg}";
 		} else {
-			return () unless $dst->get_mode('cb_showjoin');
-			$net->cmd1(PRIVMSG => $dst, 'Part: '.$src->str($net).' '.$act->{msg});
+			#return () unless $dst->get_mode('cb_showjoin');
+			$net->cmd1(PRIVMSG => $dst, 'Part: '.$src->str($net).' ('.$act->{msg}.')');
 		}
 	},
 	QUIT => sub {
@@ -573,8 +573,9 @@ $moddef{CORE} = {
 		my $nick = $act->{dst};
 		my @out;
 		for my $chan ($nick->all_chans()) {
-			next unless $chan->is_on($net) && $chan->get_mode('cb_showjoin');
-			push @out, $net->cmd1(PRIVMSG => $chan, 'Quit: '.$nick->str($net).' '.$act->{msg});
+			#next unless $chan->is_on($net) && $chan->get_mode('cb_showjoin');
+			next unless $chan->is_on($net);
+			push @out, $net->cmd1(PRIVMSG => $chan, 'Quit: '.$nick->str($net).' ('.$act->{msg}.')');
 		}
 		@out;
 	},
@@ -582,10 +583,10 @@ $moddef{CORE} = {
 		my($net,$act) = @_;
 		my $nick = $act->{dst};
 		my @out;
-		my $msg = 'Nick: '.$act->{from}->{$$net}.' changed to '.
-			$act->{to}->{$$net}.'!'.$nick->info('ident').'@'.$nick->info('vhost');
+		my $msg = 'Nick: '.$act->{from}->{$$net}.' changed to '.$act->{to}->{$$net};
 		for my $chan ($nick->all_chans()) {
-			next unless $chan->is_on($net) && $chan->get_mode('cb_showjoin');
+			#next unless $chan->is_on($net) && $chan->get_mode('cb_showjoin');
+			next unless $chan->is_on($net);
 			push @out, $net->cmd1(PRIVMSG => $chan, $msg);
 		}
 		@out;
