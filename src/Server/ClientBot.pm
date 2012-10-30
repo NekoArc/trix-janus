@@ -526,7 +526,7 @@ $moddef{CORE} = {
 			();
 		} else {
 			my $id = $src->str($net).' ('.$src->info('ident').'@'.$src->info('vhost').')';
-			$net->cmd1(PRIVMSG => $dst, "$id has Joined $chan");
+			$net->cmd1(PRIVMSG => $dst, "$id has Joined $dst");
 		}
 	},
 	DELINK => sub {
