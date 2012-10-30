@@ -526,7 +526,8 @@ $moddef{CORE} = {
 			();
 		} else {
 			my $id = $src->str($net).' ('.$src->info('ident').'@'.$src->info('vhost').')';
-			$net->cmd1(PRIVMSG => $dst, "$id has Joined $dst");
+			my $chan = $dst->str($net);
+			$net->cmd1(PRIVMSG => $dst, "$id has Joined $chan");
 		}
 	},
 	DELINK => sub {
@@ -563,7 +564,7 @@ $moddef{CORE} = {
 			my $chan = $dst->str($net);
 			"PART $chan :$act->{msg}";
 		} else {
-			$net->cmd1(PRIVMSG => $dst, $src->str($net).' has Left '.$dst.' ('.$act->{msg}.')');
+			$net->cmd1(PRIVMSG => $dst, $src->str($net).' has Left '.$dst->str($net).' ('.$act->{msg}.')');
 		}
 	},
 	QUIT => sub {
