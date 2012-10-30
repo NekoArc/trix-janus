@@ -526,7 +526,7 @@ $moddef{CORE} = {
 			();
 		} else {
 			my $id = $src->str($net).' ('.$src->info('ident').'@'.$src->info('vhost').')';
-			$net->cmd1(PRIVMSG => $dst, "Join: $id");
+			$net->cmd1(PRIVMSG => $dst, "$id has Joined $chan");
 		}
 	},
 	DELINK => sub {
@@ -563,7 +563,7 @@ $moddef{CORE} = {
 			my $chan = $dst->str($net);
 			"PART $chan :$act->{msg}";
 		} else {
-			$net->cmd1(PRIVMSG => $dst, 'Part: '.$src->str($net).' ('.$act->{msg}.')');
+			$net->cmd1(PRIVMSG => $dst, $src->str($net).' has Left '.$dst.' ('.$act->{msg}.')');
 		}
 	},
 	QUIT => sub {
@@ -572,7 +572,7 @@ $moddef{CORE} = {
 		my @out;
 		for my $chan ($nick->all_chans()) {
 			next unless $chan->is_on($net);
-			push @out, $net->cmd1(PRIVMSG => $chan, 'Quit: '.$nick->str($net).' ('.$act->{msg}.')');
+			push @out, $net->cmd1(PRIVMSG => $chan, $nick->str($net).' has Quit ('.$act->{msg}.')');
 		}
 		@out;
 	},
@@ -580,7 +580,7 @@ $moddef{CORE} = {
 		my($net,$act) = @_;
 		my $nick = $act->{dst};
 		my @out;
-		my $msg = 'Nick: '.$act->{from}->{$$net}.' Changed to '.$act->{to}->{$$net};
+		my $msg = $act->{from}->{$$net}.' is now known as '.$act->{to}->{$$net};
 		for my $chan ($nick->all_chans()) {
 			next unless $chan->is_on($net);
 			push @out, $net->cmd1(PRIVMSG => $chan, $msg);
@@ -635,14 +635,6 @@ $moddef{CORE} = {
 		my @md = @{$act->{dirs}};
 		my $i = 0;
 		while ($i < @mm) {
-			# avenj code needs a bit of tweaking... *sigh*
-			# This seems to break way too much shit...
-			#unless (ref $ma[$i] and $ma[$i]->can('homenet')) { $i++ ; next }
-#			if (Modes::mtype($mm[$i]) eq 'n' && $ma[$i]->homenet != $net) {
-#				splice @mm, $i, 1;
-#				splice @ma, $i, 1;
-#				splice @md, $i, 1;
-#			} 
 			if ($mm[$i] eq 'cb_modesync' && $md[$i] eq '+') {
 				my @modes = $net->cmode_to_irc($chan, Modes::delta(undef, $chan), $capabs[$$net]{MODES});
 				return map $net->cmd1(MODE => $chan, @$_), @modes;
